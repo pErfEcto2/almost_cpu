@@ -1,0 +1,121 @@
+\doxysection{Vector\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}\+::Iterator Struct Reference}
+\hypertarget{structVector_1_1Iterator}{}\label{structVector_1_1Iterator}\index{Vector$<$ T $>$::Iterator@{Vector$<$ T $>$::Iterator}}
+
+
+\doxylink{structVector_1_1Iterator}{Iterator} for the \doxylink{classVector}{Vector} class.  
+
+
+
+
+{\ttfamily \#include $<$vector.\+h$>$}
+
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{structVector_1_1Iterator_adc42a630550abb9fb4af47bc86d5e552}\label{structVector_1_1Iterator_adc42a630550abb9fb4af47bc86d5e552} 
+using {\bfseries iterator\+\_\+category} = std\+::forward\+\_\+iterator\+\_\+tag
+\item 
+\Hypertarget{structVector_1_1Iterator_af1b83d7f4de193834d4e725824d6ded6}\label{structVector_1_1Iterator_af1b83d7f4de193834d4e725824d6ded6} 
+using {\bfseries difference\+\_\+type} = std\+::ptrdiff\+\_\+t
+\item 
+\Hypertarget{structVector_1_1Iterator_a65d9ca135cf45ff8002e1d1bc2a6e202}\label{structVector_1_1Iterator_a65d9ca135cf45ff8002e1d1bc2a6e202} 
+using {\bfseries value\+\_\+type} = T
+\item 
+\Hypertarget{structVector_1_1Iterator_ae7f38915461c0e84718dca0b57371bee}\label{structVector_1_1Iterator_ae7f38915461c0e84718dca0b57371bee} 
+using {\bfseries pointer} = T \texorpdfstring{$\ast$}{*}
+\item 
+\Hypertarget{structVector_1_1Iterator_a8903645d15283ba9f88336e1044d88c3}\label{structVector_1_1Iterator_a8903645d15283ba9f88336e1044d88c3} 
+using {\bfseries reference} = T \&
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structVector_1_1Iterator_aa60c5eac956bd8bfa42bca001e368268}{Iterator}} (pointer ptr)
+\begin{DoxyCompactList}\small\item\em Constructs an iterator with the given pointer. \end{DoxyCompactList}\item 
+\Hypertarget{structVector_1_1Iterator_a815b567c2ada5319be25402c01962d61}\label{structVector_1_1Iterator_a815b567c2ada5319be25402c01962d61} 
+reference {\bfseries operator\texorpdfstring{$\ast$}{*}} () const
+\item 
+\Hypertarget{structVector_1_1Iterator_aeb44bad818b29e9a6ee013c0fc41824c}\label{structVector_1_1Iterator_aeb44bad818b29e9a6ee013c0fc41824c} 
+pointer {\bfseries operator-\/$>$} ()
+\item 
+\Hypertarget{structVector_1_1Iterator_a699a90b26ad5ee94c8efaae2183b6bb4}\label{structVector_1_1Iterator_a699a90b26ad5ee94c8efaae2183b6bb4} 
+\mbox{\hyperlink{structVector_1_1Iterator}{Iterator}} \& {\bfseries operator++} ()
+\item 
+\Hypertarget{structVector_1_1Iterator_a15a10dcd4b4791f7d27abd3f53514ebf}\label{structVector_1_1Iterator_a15a10dcd4b4791f7d27abd3f53514ebf} 
+\mbox{\hyperlink{structVector_1_1Iterator}{Iterator}} {\bfseries operator++} (int)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{structVector_1_1Iterator_adf9a9358b475317bd816d7b47a0f5cd1}{operator==}} (const \mbox{\hyperlink{structVector_1_1Iterator}{Iterator}} \&a, const \mbox{\hyperlink{structVector_1_1Iterator}{Iterator}} \&b)
+\begin{DoxyCompactList}\small\item\em Equality comparison operator. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{structVector_1_1Iterator_a27aed9f3ea67a677964fa51de28a5824}{operator!=}} (const \mbox{\hyperlink{structVector_1_1Iterator}{Iterator}} \&a, const \mbox{\hyperlink{structVector_1_1Iterator}{Iterator}} \&b)
+\begin{DoxyCompactList}\small\item\em Inequality comparison operator. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class T$>$\newline
+struct Vector$<$ T $>$\+::\+Iterator}
+\doxylink{structVector_1_1Iterator}{Iterator} for the \doxylink{classVector}{Vector} class. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{structVector_1_1Iterator_aa60c5eac956bd8bfa42bca001e368268}\label{structVector_1_1Iterator_aa60c5eac956bd8bfa42bca001e368268} 
+\index{Vector$<$ T $>$::Iterator@{Vector$<$ T $>$::Iterator}!Iterator@{Iterator}}
+\index{Iterator@{Iterator}!Vector$<$ T $>$::Iterator@{Vector$<$ T $>$::Iterator}}
+\doxysubsubsection{\texorpdfstring{Iterator()}{Iterator()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\mbox{\hyperlink{classVector}{Vector}}$<$ T $>$\+::\+Iterator\+::\+Iterator (\begin{DoxyParamCaption}\item[{pointer}]{ptr }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructs an iterator with the given pointer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ptr} & Pointer to an element in the vector. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{structVector_1_1Iterator_a27aed9f3ea67a677964fa51de28a5824}\label{structVector_1_1Iterator_a27aed9f3ea67a677964fa51de28a5824} 
+\index{Vector$<$ T $>$::Iterator@{Vector$<$ T $>$::Iterator}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!Vector$<$ T $>$::Iterator@{Vector$<$ T $>$::Iterator}}
+\doxysubsubsection{\texorpdfstring{operator"!=}{operator!=}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+bool operator!= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structVector_1_1Iterator}{Iterator}} \&}]{a,  }\item[{const \mbox{\hyperlink{structVector_1_1Iterator}{Iterator}} \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Inequality comparison operator. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a} & \doxylink{structVector_1_1Iterator}{Iterator} to compare. \\
+\hline
+{\em b} & \doxylink{structVector_1_1Iterator}{Iterator} to compare. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{structVector_1_1Iterator_adf9a9358b475317bd816d7b47a0f5cd1}\label{structVector_1_1Iterator_adf9a9358b475317bd816d7b47a0f5cd1} 
+\index{Vector$<$ T $>$::Iterator@{Vector$<$ T $>$::Iterator}!operator==@{operator==}}
+\index{operator==@{operator==}!Vector$<$ T $>$::Iterator@{Vector$<$ T $>$::Iterator}}
+\doxysubsubsection{\texorpdfstring{operator==}{operator==}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+bool operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structVector_1_1Iterator}{Iterator}} \&}]{a,  }\item[{const \mbox{\hyperlink{structVector_1_1Iterator}{Iterator}} \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Equality comparison operator. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a} & \doxylink{structVector_1_1Iterator}{Iterator} to compare. \\
+\hline
+{\em b} & \doxylink{structVector_1_1Iterator}{Iterator} to compare. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+vector.\+h\end{DoxyCompactItemize}

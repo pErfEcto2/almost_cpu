@@ -1,0 +1,120 @@
+\doxysection{Vector\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classVector}{}\label{classVector}\index{Vector$<$ T $>$@{Vector$<$ T $>$}}
+
+
+A simple vector data structure implementation.  
+
+
+
+
+{\ttfamily \#include $<$vector.\+h$>$}
+
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structVector_1_1Iterator}{Iterator}}
+\begin{DoxyCompactList}\small\item\em \doxylink{structVector_1_1Iterator}{Iterator} for the \doxylink{classVector}{Vector} class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classVector_a39d6069675db4ecfc1ab81d440da759a}\label{classVector_a39d6069675db4ecfc1ab81d440da759a} 
+{\bfseries Vector} ()
+\begin{DoxyCompactList}\small\item\em Constructs an empty \doxylink{classVector}{Vector} with an initial capacity = 32. \end{DoxyCompactList}\item 
+\Hypertarget{classVector_afd524fac19e6d3d69db5198ffe2952b0}\label{classVector_afd524fac19e6d3d69db5198ffe2952b0} 
+{\bfseries \texorpdfstring{$\sim$}{\string~}\+Vector} ()
+\begin{DoxyCompactList}\small\item\em Destructor for the \doxylink{classVector}{Vector} class. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classVector_a407b00b67bee952dd677ce33b3b1c752}{push\+\_\+back}} (T elem)
+\begin{DoxyCompactList}\small\item\em Adds an element to the end of the \doxylink{classVector}{Vector}. \end{DoxyCompactList}\item 
+\Hypertarget{classVector_a32ad98b135472b0ebc5d6cb3ae5d0085}\label{classVector_a32ad98b135472b0ebc5d6cb3ae5d0085} 
+void {\bfseries clear} ()
+\begin{DoxyCompactList}\small\item\em Removes all elements from the \doxylink{classVector}{Vector}. \end{DoxyCompactList}\item 
+T \& \mbox{\hyperlink{classVector_ada36811f9a98443820d1ebea0e36a429}{operator\mbox{[}$\,$\mbox{]}}} (int i)
+\begin{DoxyCompactList}\small\item\em Accesses the element at the specified index. Throws an exception if the index is out of range. \end{DoxyCompactList}\item 
+\Hypertarget{classVector_ae42ac066dad3b8fbb96fd4539900ad98}\label{classVector_ae42ac066dad3b8fbb96fd4539900ad98} 
+int {\bfseries size} ()
+\begin{DoxyCompactList}\small\item\em Returns the number of elements in the \doxylink{classVector}{Vector}. \end{DoxyCompactList}\item 
+\Hypertarget{classVector_abf6e5c48e68cdd8676d93edf0b3a6b23}\label{classVector_abf6e5c48e68cdd8676d93edf0b3a6b23} 
+\mbox{\hyperlink{structVector_1_1Iterator}{Iterator}} {\bfseries begin} ()
+\begin{DoxyCompactList}\small\item\em Returns an iterator pointing to the beginning of the \doxylink{classVector}{Vector}. \end{DoxyCompactList}\item 
+\Hypertarget{classVector_a4ff82de4613402642bea563ae35e4e7e}\label{classVector_a4ff82de4613402642bea563ae35e4e7e} 
+\mbox{\hyperlink{structVector_1_1Iterator}{Iterator}} {\bfseries end} ()
+\begin{DoxyCompactList}\small\item\em Returns an iterator pointing to the end of the \doxylink{classVector}{Vector}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classVector}{Vector}}$<$ T $>$ \mbox{\hyperlink{classVector_ae63a7e0fef69fdccb0fe5bbdf0ce0b0e}{find}} (T val)
+\begin{DoxyCompactList}\small\item\em Finds elements in the \doxylink{classVector}{Vector} that match the specified value. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class T$>$\newline
+class Vector$<$ T $>$}
+A simple vector data structure implementation. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The type of elements stored in the vector. \\
+\hline
+\end{DoxyTemplParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classVector_ae63a7e0fef69fdccb0fe5bbdf0ce0b0e}\label{classVector_ae63a7e0fef69fdccb0fe5bbdf0ce0b0e} 
+\index{Vector$<$ T $>$@{Vector$<$ T $>$}!find@{find}}
+\index{find@{find}!Vector$<$ T $>$@{Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{find()}{find()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\mbox{\hyperlink{classVector}{Vector}}$<$ T $>$ \mbox{\hyperlink{classVector}{Vector}}$<$ T $>$\+::find (\begin{DoxyParamCaption}\item[{T}]{val }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Finds elements in the \doxylink{classVector}{Vector} that match the specified value. 
+
+This method returns a new \doxylink{classVector}{Vector} containing all elements from the current \doxylink{classVector}{Vector} up to (but not including) the first occurrence of the specified value.
+
+
+\begin{DoxyParams}{Parameters}
+{\em val} & The value to search for. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classVector_ada36811f9a98443820d1ebea0e36a429}\label{classVector_ada36811f9a98443820d1ebea0e36a429} 
+\index{Vector$<$ T $>$@{Vector$<$ T $>$}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!Vector$<$ T $>$@{Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+T \& \mbox{\hyperlink{classVector}{Vector}}$<$ T $>$\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{int}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Accesses the element at the specified index. Throws an exception if the index is out of range. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em i} & The index of the element to be accessed. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & if the index is out of range. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{classVector_a407b00b67bee952dd677ce33b3b1c752}\label{classVector_a407b00b67bee952dd677ce33b3b1c752} 
+\index{Vector$<$ T $>$@{Vector$<$ T $>$}!push\_back@{push\_back}}
+\index{push\_back@{push\_back}!Vector$<$ T $>$@{Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{push\_back()}{push\_back()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void \mbox{\hyperlink{classVector}{Vector}}$<$ T $>$\+::push\+\_\+back (\begin{DoxyParamCaption}\item[{T}]{elem }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Adds an element to the end of the \doxylink{classVector}{Vector}. 
+
+If the \doxylink{classVector}{Vector}\textquotesingle{}s capacity is not enough to hold the new element, the capacity is doubled before adding the element.
+
+
+\begin{DoxyParams}{Parameters}
+{\em elem} & The element to be added. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+vector.\+h\end{DoxyCompactItemize}
