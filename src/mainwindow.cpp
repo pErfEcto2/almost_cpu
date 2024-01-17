@@ -8,7 +8,8 @@
 #include <map>
 #include "../headers/cpu.h"
 #include <QIntValidator>
-
+#include <QFileDialog>
+#include <fstream>
 
 #define MEM_SIZE 1024
 
@@ -20,11 +21,41 @@ MainWindow::MainWindow(QWidget *parent)
     ui->number_of_cores_line->setValidator(new QIntValidator(0, 65));
 }
 
-MainWindow::~MainWindow() { delete ui; }
+MainWindow::~MainWindow() {
+    delete ui;
+}
+
+void MainWindow::on_save_button_clicked() {
+    QString file_path = QFileDialog::getSaveFileName(this, "Select file");
+    if (!file_path.endsWith(".ass")) {
+        file_path += ".ass";
+    }
+
+    std::ofstream file(file_path.toStdString());
+    file << (ui->code_editor->toPlainText().toStdString());
+    file.close();
+}
+
+void MainWindow::on_import_button_clicked() {
+    QString file_path = QFileDialog::getOpenFileName(this, "Select file", "", "ASSembly lang (*.ass)");
+    std::ifstream file(file_path.toStdString());
+    std::string s;
+
+    ui->code_editor->clear();
+    while (std::getline(file, s))
+        ui->code_editor->append(QString::fromStdString(s));
+
+    file.close();
+}
 
 void MainWindow::on_run_button_clicked() {
     QString num_of_cores = ui->number_of_cores_line->text();
     if (num_of_cores.size() == 0) num_of_cores = "4";
+    else if (num_of_cores == "0") {
+        ui->text_to_show->setPlainText(
+            QString::fromStdString("invalid number of cores"));
+        return;
+    }
 
     QString bp_s = ui->breakpoint_line->text();
     int breakpoint = -1;
@@ -62,7 +93,7 @@ void MainWindow::on_run_button_clicked() {
     i = 0;
     // COMPILE PROCESS
     for (std::string &line : src) {
-        if (line == ".data" || line.size() == 0)
+        if (line == ".data" || line.size() == 0 || line[0] == ';')
             continue;
         if (line == ".code") {
             isData = false;
@@ -236,8 +267,6 @@ void MainWindow::on_run_button_clicked() {
         }
     }
 
-    // commands.push_back(Command(Type::hlt));
-
     CPU cpu(commands, mem, num_of_cores.toInt());
     try {
         cpu.run();
@@ -258,7 +287,7 @@ void MainWindow::on_run_button_clicked() {
 
 void MainWindow::on_get_desc_button_clicked() {
     std::string res{"Docs:\n"
-"1) all empty lines are ignored\n\n"
+"1) all lines with semicolon(;) at the beginning are considered as comments\n\n"
 "2) every line before '.code' section is consider '.data' section\n\n"
 "3) in the '.data' section every line must match the given regex: '\s*.+\s*=\s*\d(\.\d+)?\s*'\n\n"
 "4) redefinitions of variables or labels are forbidden\n\n"
@@ -275,4 +304,8 @@ void MainWindow::on_get_desc_button_clicked() {
     }
     ui->text_to_show->setPlainText(QString::fromStdString(res));
 }
+
+
+
+
 
