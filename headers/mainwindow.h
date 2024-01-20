@@ -17,11 +17,8 @@ public:
 
 private slots:
     void on_run_button_clicked();
-
     void on_get_desc_button_clicked();
-
     void on_save_button_clicked();
-
     void on_import_button_clicked();
 
 private:

@@ -3,6 +3,9 @@
 Core::Core() {
     instructionPtr = 0;
     isWorking = false;
+    flags = 0;
+    iALU.flags = &flags;
+    fALU.flags = &flags;
 }
 
 void Core::oper2alu() {
@@ -72,4 +75,17 @@ void Core::jmp() {
 
 void Core::hlt() {
     isWorking = false;
+}
+
+void Core::push() {
+    stack.push(r1);
+}
+
+void Core::pop() {
+    r1 = stack.pop();
+}
+
+void Core::cmp() {
+    oper2alu();
+    iALU.cmp();
 }

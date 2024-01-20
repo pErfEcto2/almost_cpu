@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/mephi/cpp/lab3/tests/_deps/googletest-src/googlemock/include -I/home/mephi/cpp/lab3/tests/_deps/googletest-src/googlemock -isystem /home/mephi/cpp/lab3/tests/_deps/googletest-src/googletest/include -isystem /home/mephi/cpp/lab3/tests/_deps/googletest-src/googletest
+CXX_INCLUDES = -I/home/mephi/cpp/almost_cpu/tests/_deps/googletest-src/googlemock/include -I/home/mephi/cpp/almost_cpu/tests/_deps/googletest-src/googlemock -isystem /home/mephi/cpp/almost_cpu/tests/_deps/googletest-src/googletest/include -isystem /home/mephi/cpp/almost_cpu/tests/_deps/googletest-src/googletest
 
 CXX_FLAGS = -std=c++23 -Wall -Wshadow -Wno-error=dangling-else -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -Wno-unused-parameter -Wno-missing-field-initializers
 

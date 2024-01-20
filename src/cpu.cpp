@@ -2,7 +2,6 @@
 #include <stdexcept>
 #include "../headers/lib.h"
 #include <thread>
-#include <mutex>
 
 
 CPU::CPU(Vector<Command> &c, Memory &m, int n) : commands(c), memory(m) {
@@ -38,6 +37,8 @@ unsigned int CPU::oper2val(std::string oper, unsigned int i) {
   return str2uint(oper);
 }
 
+#include <iostream>
+
 void CPU::execCommand(Command command, unsigned int i) {
   unsigned int val;
   switch (command.type) {
@@ -57,7 +58,8 @@ void CPU::execCommand(Command command, unsigned int i) {
     else if (command.operA == "B")
       regB = val;
     else {
-      memory[std::stoi(command.operB.substr(1))].mut.unlock();
+      if (command.operB[0] == 'm')
+        memory[std::stoi(command.operB.substr(1))].mut.unlock();
 
       memory[std::stoi(command.operA.substr(1))].mut.lock();
       memory[std::stoi(command.operA.substr(1))].value = val;
@@ -69,6 +71,7 @@ void CPU::execCommand(Command command, unsigned int i) {
   case Type::sum:
   case Type::sumu:
   case Type::sumf:
+  case Type::cmp:
     cores[i].r1 = oper2val(command.operA, i);
     if (command.operA == command.operB && command.operA[0] == 'm') {
         memory[std::stoi(command.operA.substr(1))].mut.unlock();
@@ -86,6 +89,10 @@ void CPU::execCommand(Command command, unsigned int i) {
 
     case Type::sumf:
       cores[i].sumf();
+      break;
+
+    case Type::cmp:
+      cores[i].cmp();
       break;
     }
 
@@ -111,6 +118,8 @@ void CPU::execCommand(Command command, unsigned int i) {
   case Type::inc:
   case Type::incu:
   case Type::incf:
+  case Type::push:
+  case Type::pop:
     cores[i].r1 = oper2val(command.operA, i);
 
     switch (command.type) {
@@ -124,6 +133,14 @@ void CPU::execCommand(Command command, unsigned int i) {
 
     case Type::incf:
       cores[i].incf();
+      break;
+
+    case Type::push:
+      cores[i].push();
+      break;
+
+    case Type::pop:
+      cores[i].pop();
       break;
     }
 
@@ -259,10 +276,12 @@ std::string CPU::getStatus() {
 
   for (int i{0}; i < numOfCores; i++) {
     res += "\nCORE #" + std::to_string(i);
-    res += "\nValue of the r1: " + std::to_string(cores[i].r1) + "(" + std::to_string(uint2int(cores[i].r1)) + ", " + std::to_string(uint2float(cores[i].r1)) + ")";
-    res += "\nValue of the r2: " + std::to_string(cores[i].r2) + "(" + std::to_string(uint2int(cores[i].r2)) + ", " + std::to_string(uint2float(cores[i].r2)) + ")";
-    res += "\nInstruction pointer is " +
-           std::to_string(cores[i].instructionPtr) + "\n";
+    res += "\n Value of the r1: " + std::to_string(cores[i].r1) + "(" + std::to_string(uint2int(cores[i].r1)) + ", " + std::to_string(uint2float(cores[i].r1)) + ")";
+    res += "\n Value of the r2: " + std::to_string(cores[i].r2) + "(" + std::to_string(uint2int(cores[i].r2)) + ", " + std::to_string(uint2float(cores[i].r2)) + ")";
+    res += "\n Instruction pointer is " +
+           std::to_string(cores[i].instructionPtr);
+    res += "\n Flags: " + char2bin_str(cores[i].flags);
+    res += "\n Stack: " + stack2str(cores[i].stack.values) + "\n\n";
   }
 
   return res;

@@ -4,19 +4,19 @@
 cmake_minimum_required(VERSION 3.5)
 
 file(MAKE_DIRECTORY
-  "/home/mephi/cpp/lab3/tests/_deps/googletest-src"
-  "/home/mephi/cpp/lab3/tests/_deps/googletest-build"
-  "/home/mephi/cpp/lab3/tests/_deps/googletest-subbuild/googletest-populate-prefix"
-  "/home/mephi/cpp/lab3/tests/_deps/googletest-subbuild/googletest-populate-prefix/tmp"
-  "/home/mephi/cpp/lab3/tests/_deps/googletest-subbuild/googletest-populate-prefix/src/googletest-populate-stamp"
-  "/home/mephi/cpp/lab3/tests/_deps/googletest-subbuild/googletest-populate-prefix/src"
-  "/home/mephi/cpp/lab3/tests/_deps/googletest-subbuild/googletest-populate-prefix/src/googletest-populate-stamp"
+  "/home/mephi/cpp/almost_cpu/tests/_deps/googletest-src"
+  "/home/mephi/cpp/almost_cpu/tests/_deps/googletest-build"
+  "/home/mephi/cpp/almost_cpu/tests/_deps/googletest-subbuild/googletest-populate-prefix"
+  "/home/mephi/cpp/almost_cpu/tests/_deps/googletest-subbuild/googletest-populate-prefix/tmp"
+  "/home/mephi/cpp/almost_cpu/tests/_deps/googletest-subbuild/googletest-populate-prefix/src/googletest-populate-stamp"
+  "/home/mephi/cpp/almost_cpu/tests/_deps/googletest-subbuild/googletest-populate-prefix/src"
+  "/home/mephi/cpp/almost_cpu/tests/_deps/googletest-subbuild/googletest-populate-prefix/src/googletest-populate-stamp"
 )
 
 set(configSubDirs )
 foreach(subDir IN LISTS configSubDirs)
-    file(MAKE_DIRECTORY "/home/mephi/cpp/lab3/tests/_deps/googletest-subbuild/googletest-populate-prefix/src/googletest-populate-stamp/${subDir}")
+    file(MAKE_DIRECTORY "/home/mephi/cpp/almost_cpu/tests/_deps/googletest-subbuild/googletest-populate-prefix/src/googletest-populate-stamp/${subDir}")
 endforeach()
 if(cfgdir)
-  file(MAKE_DIRECTORY "/home/mephi/cpp/lab3/tests/_deps/googletest-subbuild/googletest-populate-prefix/src/googletest-populate-stamp${cfgdir}") # cfgdir has leading slash
+  file(MAKE_DIRECTORY "/home/mephi/cpp/almost_cpu/tests/_deps/googletest-subbuild/googletest-populate-prefix/src/googletest-populate-stamp${cfgdir}") # cfgdir has leading slash
 endif()

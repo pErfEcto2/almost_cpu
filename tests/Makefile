@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/mephi/cpp/lab3/tests
+CMAKE_SOURCE_DIR = /home/mephi/cpp/almost_cpu/tests
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/mephi/cpp/lab3/tests
+CMAKE_BINARY_DIR = /home/mephi/cpp/almost_cpu/tests
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -142,9 +142,9 @@ install/strip/fast: preinstall/fast
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/mephi/cpp/lab3/tests/CMakeFiles /home/mephi/cpp/lab3/tests//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/mephi/cpp/almost_cpu/tests/CMakeFiles /home/mephi/cpp/almost_cpu/tests//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/mephi/cpp/lab3/tests/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/mephi/cpp/almost_cpu/tests/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -236,149 +236,149 @@ gtest_main/fast:
 	$(MAKE) $(MAKESILENT) -f _deps/googletest-build/googletest/CMakeFiles/gtest_main.dir/build.make _deps/googletest-build/googletest/CMakeFiles/gtest_main.dir/build
 .PHONY : gtest_main/fast
 
-home/mephi/cpp/lab3/src/alu.o: home/mephi/cpp/lab3/src/alu.cpp.o
-.PHONY : home/mephi/cpp/lab3/src/alu.o
+home/mephi/cpp/almost_cpu/src/alu.o: home/mephi/cpp/almost_cpu/src/alu.cpp.o
+.PHONY : home/mephi/cpp/almost_cpu/src/alu.o
 
 # target to build an object file
-home/mephi/cpp/lab3/src/alu.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/home/mephi/cpp/lab3/src/alu.cpp.o
-.PHONY : home/mephi/cpp/lab3/src/alu.cpp.o
+home/mephi/cpp/almost_cpu/src/alu.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/home/mephi/cpp/almost_cpu/src/alu.cpp.o
+.PHONY : home/mephi/cpp/almost_cpu/src/alu.cpp.o
 
-home/mephi/cpp/lab3/src/alu.i: home/mephi/cpp/lab3/src/alu.cpp.i
-.PHONY : home/mephi/cpp/lab3/src/alu.i
+home/mephi/cpp/almost_cpu/src/alu.i: home/mephi/cpp/almost_cpu/src/alu.cpp.i
+.PHONY : home/mephi/cpp/almost_cpu/src/alu.i
 
 # target to preprocess a source file
-home/mephi/cpp/lab3/src/alu.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/home/mephi/cpp/lab3/src/alu.cpp.i
-.PHONY : home/mephi/cpp/lab3/src/alu.cpp.i
+home/mephi/cpp/almost_cpu/src/alu.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/home/mephi/cpp/almost_cpu/src/alu.cpp.i
+.PHONY : home/mephi/cpp/almost_cpu/src/alu.cpp.i
 
-home/mephi/cpp/lab3/src/alu.s: home/mephi/cpp/lab3/src/alu.cpp.s
-.PHONY : home/mephi/cpp/lab3/src/alu.s
+home/mephi/cpp/almost_cpu/src/alu.s: home/mephi/cpp/almost_cpu/src/alu.cpp.s
+.PHONY : home/mephi/cpp/almost_cpu/src/alu.s
 
 # target to generate assembly for a file
-home/mephi/cpp/lab3/src/alu.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/home/mephi/cpp/lab3/src/alu.cpp.s
-.PHONY : home/mephi/cpp/lab3/src/alu.cpp.s
+home/mephi/cpp/almost_cpu/src/alu.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/home/mephi/cpp/almost_cpu/src/alu.cpp.s
+.PHONY : home/mephi/cpp/almost_cpu/src/alu.cpp.s
 
-home/mephi/cpp/lab3/src/command.o: home/mephi/cpp/lab3/src/command.cpp.o
-.PHONY : home/mephi/cpp/lab3/src/command.o
+home/mephi/cpp/almost_cpu/src/command.o: home/mephi/cpp/almost_cpu/src/command.cpp.o
+.PHONY : home/mephi/cpp/almost_cpu/src/command.o
 
 # target to build an object file
-home/mephi/cpp/lab3/src/command.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/home/mephi/cpp/lab3/src/command.cpp.o
-.PHONY : home/mephi/cpp/lab3/src/command.cpp.o
+home/mephi/cpp/almost_cpu/src/command.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/home/mephi/cpp/almost_cpu/src/command.cpp.o
+.PHONY : home/mephi/cpp/almost_cpu/src/command.cpp.o
 
-home/mephi/cpp/lab3/src/command.i: home/mephi/cpp/lab3/src/command.cpp.i
-.PHONY : home/mephi/cpp/lab3/src/command.i
+home/mephi/cpp/almost_cpu/src/command.i: home/mephi/cpp/almost_cpu/src/command.cpp.i
+.PHONY : home/mephi/cpp/almost_cpu/src/command.i
 
 # target to preprocess a source file
-home/mephi/cpp/lab3/src/command.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/home/mephi/cpp/lab3/src/command.cpp.i
-.PHONY : home/mephi/cpp/lab3/src/command.cpp.i
+home/mephi/cpp/almost_cpu/src/command.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/home/mephi/cpp/almost_cpu/src/command.cpp.i
+.PHONY : home/mephi/cpp/almost_cpu/src/command.cpp.i
 
-home/mephi/cpp/lab3/src/command.s: home/mephi/cpp/lab3/src/command.cpp.s
-.PHONY : home/mephi/cpp/lab3/src/command.s
+home/mephi/cpp/almost_cpu/src/command.s: home/mephi/cpp/almost_cpu/src/command.cpp.s
+.PHONY : home/mephi/cpp/almost_cpu/src/command.s
 
 # target to generate assembly for a file
-home/mephi/cpp/lab3/src/command.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/home/mephi/cpp/lab3/src/command.cpp.s
-.PHONY : home/mephi/cpp/lab3/src/command.cpp.s
+home/mephi/cpp/almost_cpu/src/command.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/home/mephi/cpp/almost_cpu/src/command.cpp.s
+.PHONY : home/mephi/cpp/almost_cpu/src/command.cpp.s
 
-home/mephi/cpp/lab3/src/core.o: home/mephi/cpp/lab3/src/core.cpp.o
-.PHONY : home/mephi/cpp/lab3/src/core.o
+home/mephi/cpp/almost_cpu/src/core.o: home/mephi/cpp/almost_cpu/src/core.cpp.o
+.PHONY : home/mephi/cpp/almost_cpu/src/core.o
 
 # target to build an object file
-home/mephi/cpp/lab3/src/core.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/home/mephi/cpp/lab3/src/core.cpp.o
-.PHONY : home/mephi/cpp/lab3/src/core.cpp.o
+home/mephi/cpp/almost_cpu/src/core.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/home/mephi/cpp/almost_cpu/src/core.cpp.o
+.PHONY : home/mephi/cpp/almost_cpu/src/core.cpp.o
 
-home/mephi/cpp/lab3/src/core.i: home/mephi/cpp/lab3/src/core.cpp.i
-.PHONY : home/mephi/cpp/lab3/src/core.i
+home/mephi/cpp/almost_cpu/src/core.i: home/mephi/cpp/almost_cpu/src/core.cpp.i
+.PHONY : home/mephi/cpp/almost_cpu/src/core.i
 
 # target to preprocess a source file
-home/mephi/cpp/lab3/src/core.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/home/mephi/cpp/lab3/src/core.cpp.i
-.PHONY : home/mephi/cpp/lab3/src/core.cpp.i
+home/mephi/cpp/almost_cpu/src/core.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/home/mephi/cpp/almost_cpu/src/core.cpp.i
+.PHONY : home/mephi/cpp/almost_cpu/src/core.cpp.i
 
-home/mephi/cpp/lab3/src/core.s: home/mephi/cpp/lab3/src/core.cpp.s
-.PHONY : home/mephi/cpp/lab3/src/core.s
+home/mephi/cpp/almost_cpu/src/core.s: home/mephi/cpp/almost_cpu/src/core.cpp.s
+.PHONY : home/mephi/cpp/almost_cpu/src/core.s
 
 # target to generate assembly for a file
-home/mephi/cpp/lab3/src/core.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/home/mephi/cpp/lab3/src/core.cpp.s
-.PHONY : home/mephi/cpp/lab3/src/core.cpp.s
+home/mephi/cpp/almost_cpu/src/core.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/home/mephi/cpp/almost_cpu/src/core.cpp.s
+.PHONY : home/mephi/cpp/almost_cpu/src/core.cpp.s
 
-home/mephi/cpp/lab3/src/cpu.o: home/mephi/cpp/lab3/src/cpu.cpp.o
-.PHONY : home/mephi/cpp/lab3/src/cpu.o
+home/mephi/cpp/almost_cpu/src/cpu.o: home/mephi/cpp/almost_cpu/src/cpu.cpp.o
+.PHONY : home/mephi/cpp/almost_cpu/src/cpu.o
 
 # target to build an object file
-home/mephi/cpp/lab3/src/cpu.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/home/mephi/cpp/lab3/src/cpu.cpp.o
-.PHONY : home/mephi/cpp/lab3/src/cpu.cpp.o
+home/mephi/cpp/almost_cpu/src/cpu.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/home/mephi/cpp/almost_cpu/src/cpu.cpp.o
+.PHONY : home/mephi/cpp/almost_cpu/src/cpu.cpp.o
 
-home/mephi/cpp/lab3/src/cpu.i: home/mephi/cpp/lab3/src/cpu.cpp.i
-.PHONY : home/mephi/cpp/lab3/src/cpu.i
+home/mephi/cpp/almost_cpu/src/cpu.i: home/mephi/cpp/almost_cpu/src/cpu.cpp.i
+.PHONY : home/mephi/cpp/almost_cpu/src/cpu.i
 
 # target to preprocess a source file
-home/mephi/cpp/lab3/src/cpu.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/home/mephi/cpp/lab3/src/cpu.cpp.i
-.PHONY : home/mephi/cpp/lab3/src/cpu.cpp.i
+home/mephi/cpp/almost_cpu/src/cpu.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/home/mephi/cpp/almost_cpu/src/cpu.cpp.i
+.PHONY : home/mephi/cpp/almost_cpu/src/cpu.cpp.i
 
-home/mephi/cpp/lab3/src/cpu.s: home/mephi/cpp/lab3/src/cpu.cpp.s
-.PHONY : home/mephi/cpp/lab3/src/cpu.s
+home/mephi/cpp/almost_cpu/src/cpu.s: home/mephi/cpp/almost_cpu/src/cpu.cpp.s
+.PHONY : home/mephi/cpp/almost_cpu/src/cpu.s
 
 # target to generate assembly for a file
-home/mephi/cpp/lab3/src/cpu.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/home/mephi/cpp/lab3/src/cpu.cpp.s
-.PHONY : home/mephi/cpp/lab3/src/cpu.cpp.s
+home/mephi/cpp/almost_cpu/src/cpu.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/home/mephi/cpp/almost_cpu/src/cpu.cpp.s
+.PHONY : home/mephi/cpp/almost_cpu/src/cpu.cpp.s
 
-home/mephi/cpp/lab3/src/lib.o: home/mephi/cpp/lab3/src/lib.cpp.o
-.PHONY : home/mephi/cpp/lab3/src/lib.o
+home/mephi/cpp/almost_cpu/src/lib.o: home/mephi/cpp/almost_cpu/src/lib.cpp.o
+.PHONY : home/mephi/cpp/almost_cpu/src/lib.o
 
 # target to build an object file
-home/mephi/cpp/lab3/src/lib.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/home/mephi/cpp/lab3/src/lib.cpp.o
-.PHONY : home/mephi/cpp/lab3/src/lib.cpp.o
+home/mephi/cpp/almost_cpu/src/lib.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/home/mephi/cpp/almost_cpu/src/lib.cpp.o
+.PHONY : home/mephi/cpp/almost_cpu/src/lib.cpp.o
 
-home/mephi/cpp/lab3/src/lib.i: home/mephi/cpp/lab3/src/lib.cpp.i
-.PHONY : home/mephi/cpp/lab3/src/lib.i
+home/mephi/cpp/almost_cpu/src/lib.i: home/mephi/cpp/almost_cpu/src/lib.cpp.i
+.PHONY : home/mephi/cpp/almost_cpu/src/lib.i
 
 # target to preprocess a source file
-home/mephi/cpp/lab3/src/lib.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/home/mephi/cpp/lab3/src/lib.cpp.i
-.PHONY : home/mephi/cpp/lab3/src/lib.cpp.i
+home/mephi/cpp/almost_cpu/src/lib.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/home/mephi/cpp/almost_cpu/src/lib.cpp.i
+.PHONY : home/mephi/cpp/almost_cpu/src/lib.cpp.i
 
-home/mephi/cpp/lab3/src/lib.s: home/mephi/cpp/lab3/src/lib.cpp.s
-.PHONY : home/mephi/cpp/lab3/src/lib.s
+home/mephi/cpp/almost_cpu/src/lib.s: home/mephi/cpp/almost_cpu/src/lib.cpp.s
+.PHONY : home/mephi/cpp/almost_cpu/src/lib.s
 
 # target to generate assembly for a file
-home/mephi/cpp/lab3/src/lib.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/home/mephi/cpp/lab3/src/lib.cpp.s
-.PHONY : home/mephi/cpp/lab3/src/lib.cpp.s
+home/mephi/cpp/almost_cpu/src/lib.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/home/mephi/cpp/almost_cpu/src/lib.cpp.s
+.PHONY : home/mephi/cpp/almost_cpu/src/lib.cpp.s
 
-home/mephi/cpp/lab3/src/memory.o: home/mephi/cpp/lab3/src/memory.cpp.o
-.PHONY : home/mephi/cpp/lab3/src/memory.o
+home/mephi/cpp/almost_cpu/src/memory.o: home/mephi/cpp/almost_cpu/src/memory.cpp.o
+.PHONY : home/mephi/cpp/almost_cpu/src/memory.o
 
 # target to build an object file
-home/mephi/cpp/lab3/src/memory.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/home/mephi/cpp/lab3/src/memory.cpp.o
-.PHONY : home/mephi/cpp/lab3/src/memory.cpp.o
+home/mephi/cpp/almost_cpu/src/memory.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/home/mephi/cpp/almost_cpu/src/memory.cpp.o
+.PHONY : home/mephi/cpp/almost_cpu/src/memory.cpp.o
 
-home/mephi/cpp/lab3/src/memory.i: home/mephi/cpp/lab3/src/memory.cpp.i
-.PHONY : home/mephi/cpp/lab3/src/memory.i
+home/mephi/cpp/almost_cpu/src/memory.i: home/mephi/cpp/almost_cpu/src/memory.cpp.i
+.PHONY : home/mephi/cpp/almost_cpu/src/memory.i
 
 # target to preprocess a source file
-home/mephi/cpp/lab3/src/memory.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/home/mephi/cpp/lab3/src/memory.cpp.i
-.PHONY : home/mephi/cpp/lab3/src/memory.cpp.i
+home/mephi/cpp/almost_cpu/src/memory.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/home/mephi/cpp/almost_cpu/src/memory.cpp.i
+.PHONY : home/mephi/cpp/almost_cpu/src/memory.cpp.i
 
-home/mephi/cpp/lab3/src/memory.s: home/mephi/cpp/lab3/src/memory.cpp.s
-.PHONY : home/mephi/cpp/lab3/src/memory.s
+home/mephi/cpp/almost_cpu/src/memory.s: home/mephi/cpp/almost_cpu/src/memory.cpp.s
+.PHONY : home/mephi/cpp/almost_cpu/src/memory.s
 
 # target to generate assembly for a file
-home/mephi/cpp/lab3/src/memory.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/home/mephi/cpp/lab3/src/memory.cpp.s
-.PHONY : home/mephi/cpp/lab3/src/memory.cpp.s
+home/mephi/cpp/almost_cpu/src/memory.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/home/mephi/cpp/almost_cpu/src/memory.cpp.s
+.PHONY : home/mephi/cpp/almost_cpu/src/memory.cpp.s
 
 main.o: main.cpp.o
 .PHONY : main.o
@@ -422,24 +422,24 @@ help:
 	@echo "... gmock_main"
 	@echo "... gtest"
 	@echo "... gtest_main"
-	@echo "... home/mephi/cpp/lab3/src/alu.o"
-	@echo "... home/mephi/cpp/lab3/src/alu.i"
-	@echo "... home/mephi/cpp/lab3/src/alu.s"
-	@echo "... home/mephi/cpp/lab3/src/command.o"
-	@echo "... home/mephi/cpp/lab3/src/command.i"
-	@echo "... home/mephi/cpp/lab3/src/command.s"
-	@echo "... home/mephi/cpp/lab3/src/core.o"
-	@echo "... home/mephi/cpp/lab3/src/core.i"
-	@echo "... home/mephi/cpp/lab3/src/core.s"
-	@echo "... home/mephi/cpp/lab3/src/cpu.o"
-	@echo "... home/mephi/cpp/lab3/src/cpu.i"
-	@echo "... home/mephi/cpp/lab3/src/cpu.s"
-	@echo "... home/mephi/cpp/lab3/src/lib.o"
-	@echo "... home/mephi/cpp/lab3/src/lib.i"
-	@echo "... home/mephi/cpp/lab3/src/lib.s"
-	@echo "... home/mephi/cpp/lab3/src/memory.o"
-	@echo "... home/mephi/cpp/lab3/src/memory.i"
-	@echo "... home/mephi/cpp/lab3/src/memory.s"
+	@echo "... home/mephi/cpp/almost_cpu/src/alu.o"
+	@echo "... home/mephi/cpp/almost_cpu/src/alu.i"
+	@echo "... home/mephi/cpp/almost_cpu/src/alu.s"
+	@echo "... home/mephi/cpp/almost_cpu/src/command.o"
+	@echo "... home/mephi/cpp/almost_cpu/src/command.i"
+	@echo "... home/mephi/cpp/almost_cpu/src/command.s"
+	@echo "... home/mephi/cpp/almost_cpu/src/core.o"
+	@echo "... home/mephi/cpp/almost_cpu/src/core.i"
+	@echo "... home/mephi/cpp/almost_cpu/src/core.s"
+	@echo "... home/mephi/cpp/almost_cpu/src/cpu.o"
+	@echo "... home/mephi/cpp/almost_cpu/src/cpu.i"
+	@echo "... home/mephi/cpp/almost_cpu/src/cpu.s"
+	@echo "... home/mephi/cpp/almost_cpu/src/lib.o"
+	@echo "... home/mephi/cpp/almost_cpu/src/lib.i"
+	@echo "... home/mephi/cpp/almost_cpu/src/lib.s"
+	@echo "... home/mephi/cpp/almost_cpu/src/memory.o"
+	@echo "... home/mephi/cpp/almost_cpu/src/memory.i"
+	@echo "... home/mephi/cpp/almost_cpu/src/memory.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

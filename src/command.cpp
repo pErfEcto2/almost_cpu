@@ -1,5 +1,4 @@
 #include "../headers/command.h"
-#include <iostream>
 
 Command::Command(Type t) {
     operA = "";
@@ -52,6 +51,15 @@ std::string Command::desc() {
 
         case Type::hlt:
             return std::string("hlt instruction stops an execution for a core");
+
+        case Type::push:
+            return std::string("push instruction pushes a value on the stack");
+
+        case Type::pop:
+            return std::string("pop instruction returns a value from the stack");
+
+        case Type::cmp:
+            return std::string("cmp instruction compares two operands and sets EQUALS(first operand == second operand) and LESS(first operand < second operand) flags(first operand cant be a number)");
         }
 
         return "";

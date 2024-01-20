@@ -1,6 +1,6 @@
 #include "../headers/lib.h"
-#include <iostream>
 #include <regex>
+#include "../headers/memory.h"
 
 Vector<std::string> str_split(std::string str, char pattern) {
     Vector<std::string> res;
@@ -48,4 +48,18 @@ std::string uint2hex(unsigned int n) {
     std::stringstream stream;
     stream << std::hex << n;
     return std::string(stream.str());
+}
+
+std::string char2bin_str(char s) {
+    std::string res;
+    for (int i = 0; i < 8; i++)
+           res = std::to_string(((1 << i) & s) >> i) + res;
+
+    return res;
+}
+
+std::string stack2str(unsigned int *values) {
+    std::string res;
+    for (int i = 0; i < STACK_SIZE; i++) res += uint2hex(values[i]) + " ";
+    return res;
 }

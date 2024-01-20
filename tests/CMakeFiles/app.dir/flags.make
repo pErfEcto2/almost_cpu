@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -isystem /home/mephi/cpp/lab3/tests/_deps/googletest-src/googletest/include -isystem /home/mephi/cpp/lab3/tests/_deps/googletest-src/googletest
+CXX_INCLUDES = -isystem /home/mephi/cpp/almost_cpu/tests/_deps/googletest-src/googletest/include -isystem /home/mephi/cpp/almost_cpu/tests/_deps/googletest-src/googletest
 
 CXX_FLAGS = -std=gnu++23 --coverage
 

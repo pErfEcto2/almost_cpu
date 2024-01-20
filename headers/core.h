@@ -2,6 +2,8 @@
 #define CORE_H
 
 #include "alu.h"
+#include "memory.h"
+
 
 class Core {
 private:
@@ -16,6 +18,8 @@ public:
     unsigned int r1;
     unsigned int r2;
     bool isWorking;
+    char flags;
+    Stack stack;
 
     void sum();
     void sumu();
@@ -28,6 +32,9 @@ public:
     void incf();
     void jmp();
     void hlt();
+    void push();
+    void pop();
+    void cmp();
 };
 
 #endif // CORE_H

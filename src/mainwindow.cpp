@@ -18,7 +18,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
     ui->breakpoint_line->setValidator(new QIntValidator(0, 99999));
-    ui->number_of_cores_line->setValidator(new QIntValidator(0, 65));
+    ui->number_of_cores_line->setValidator(new QIntValidator(0, 99));
 }
 
 MainWindow::~MainWindow() {
@@ -50,7 +50,7 @@ void MainWindow::on_import_button_clicked() {
 
 void MainWindow::on_run_button_clicked() {
     QString num_of_cores = ui->number_of_cores_line->text();
-    if (num_of_cores.size() == 0) num_of_cores = "4";
+    if (num_of_cores.size() == 0) num_of_cores = "2";
     else if (num_of_cores == "0") {
         ui->text_to_show->setPlainText(
             QString::fromStdString("invalid number of cores"));
@@ -61,8 +61,7 @@ void MainWindow::on_run_button_clicked() {
     int breakpoint = -1;
     if (bp_s.size() != 0) breakpoint = bp_s.toInt();
 
-    Vector<std::string> src =
-        str_split(ui->code_editor->toPlainText().toStdString(), '\n');
+    Vector<std::string> src = str_split(ui->code_editor->toPlainText().toStdString(), '\n');
     for (auto &s : src) {
         s = trim(s);
     }
@@ -91,7 +90,7 @@ void MainWindow::on_run_button_clicked() {
     }
 
     i = 0;
-    // COMPILE PROCESS
+    // COMPILATION
     for (std::string &line : src) {
         if (line == ".data" || line.size() == 0 || line[0] == ';')
             continue;
@@ -184,6 +183,12 @@ void MainWindow::on_run_button_clicked() {
                 command.type = Type::strthread;
             else if (instr == "hlt")
                 command.type = Type::hlt;
+            else if (instr == "push")
+                command.type = Type::push;
+            else if (instr == "pop")
+                command.type = Type::pop;
+            else if (instr == "cmp")
+                command.type = Type::cmp;
             else {
                 ui->text_to_show->setPlainText(QString::fromStdString(
                     "unknown instruction '" + instr + "' in line: \n" + line));
@@ -194,7 +199,7 @@ void MainWindow::on_run_button_clicked() {
 
             try {
                 if (is_num(command_and_opers[1])) {
-                    ui->text_to_show->setPlainText(QString::fromStdString("cannot use lvalue '" + command_and_opers[1] + "' in line:\n" + line));
+                    ui->text_to_show->setPlainText(QString::fromStdString("cannot use rvalue '" + command_and_opers[1] + "' in line:\n" + line));
                     return;
                 }
                 switch (command.type) {
@@ -205,6 +210,7 @@ void MainWindow::on_run_button_clicked() {
                 case Type::mul:
                 case Type::mulf:
                 case Type::mulu:
+                case Type::cmp:
                     if (variables.find(command_and_opers[1]) != variables.end())
                         command.operA = "m" + std::to_string(variables[command_and_opers[1]]);
                     else if (is_num(command_and_opers[1]) || command_and_opers[1] == "A" || command_and_opers[1] == "B" ||
@@ -232,6 +238,8 @@ void MainWindow::on_run_button_clicked() {
                 case Type::inc:
                 case Type::incf:
                 case Type::incu:
+                case Type::push:
+                case Type::pop:
                     if (variables.find(command_and_opers[1]) != variables.end())
                             command.operA = std::to_string(variables[command_and_opers[1]]);
                     else if (is_num(command_and_opers[1]) || command_and_opers[1] == "A" || command_and_opers[1] == "B" ||
@@ -295,7 +303,7 @@ void MainWindow::on_get_desc_button_clicked() {
 "6) every line in the '.code' section must match the given regex: '\s*.+(\s+.+)?(\s+.+)?\s*'\n(<instruction> <oper1 or empty> <oper2 or empty>)\n\n"
 "7) 'A', 'B', 'r1' and 'r2' are names of registers. First two are common for all cores. Each core has last two registers\n\n"
 "8) arguments in instructions are either a variable name, a memory address(a number, which starts with 'm' letter) or a number\n\n"
-"9) you can specify number of cores in the 'number of cores' line. Default is 4\n\n"
+"9) you can specify number of cores in the 'number of cores' line. Default is 2\n"
 "10) you can specify a breakpoint(aka last instruction to be executed) in the 'breakpoint' line\n\n"
 "11) you can run code by pressing Ctrl+r and get docs by pressing Ctrl+d\n\n\n"
 "Here is a list of instructions:\n"};
@@ -304,8 +312,3 @@ void MainWindow::on_get_desc_button_clicked() {
     }
     ui->text_to_show->setPlainText(QString::fromStdString(res));
 }
-
-
-
-
-

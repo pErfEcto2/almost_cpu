@@ -10,6 +10,12 @@
 #include "../headers/memory.h"
 #include "../headers/vector.h"
 
+TEST(char2bin_str, any) {
+  ASSERT_EQ(char2bin_str(0), "00000000");
+  ASSERT_EQ(char2bin_str(1), "00000001");
+  ASSERT_EQ(char2bin_str((char)255), "11111111");
+}
+
 TEST(uint2hex, any_tests) {
   ASSERT_EQ(uint2hex(3), "3");
   ASSERT_EQ(uint2hex(10), "a");
@@ -60,9 +66,22 @@ TEST(cpu, any_tests) {
   cmd.operB = "5";
   cmds.push_back(cmd);
 
+  cmd.type = Type::push;
+  cmd.operA = "A";
+  cmds.push_back(cmd);
+
+  cmd.type = Type::pop;
+  cmd.operA = "A";
+  cmds.push_back(cmd);
+
   cmd.type = Type::mul;
   cmd.operA = "A";
   cmd.operB = "5";
+  cmds.push_back(cmd);
+
+  cmd.type = Type::mulf;
+  cmd.operA = "m0";
+  cmd.operB = "m0";
   cmds.push_back(cmd);
 
   cmd.type = Type::mulu;
@@ -80,6 +99,11 @@ TEST(cpu, any_tests) {
   cmd.operB = "1";
   cmds.push_back(cmd);
 
+  cmd.type = Type::cmp;
+  cmd.operA = "m1";
+  cmd.operB = "m1";
+  cmds.push_back(cmd);
+
   cmd.type = Type::mov;
   cmd.operA = "r2";
   cmd.operB = "1";
@@ -93,6 +117,11 @@ TEST(cpu, any_tests) {
   cmd.type = Type::mov;
   cmd.operA = "m0";
   cmd.operB = "m0";
+  cmds.push_back(cmd);
+
+  cmd.type = Type::mov;
+  cmd.operA = "m0";
+  cmd.operB = "1";
   cmds.push_back(cmd);
 
   cmd.type = Type::sum;
@@ -315,6 +344,11 @@ TEST(core, tests) {
 
   c.hlt();
   ASSERT_FALSE(c.isWorking);
+
+  c.r1 = 3;
+  c.push();
+  c.pop();
+  ASSERT_EQ(c.r1, 3);
 }
 
 TEST(command, tests) {

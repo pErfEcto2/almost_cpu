@@ -16,6 +16,9 @@ enum Type {
     mulf,
     jmp,
     strthread,
+    push,
+    pop,
+    cmp,
     hlt
 };
 

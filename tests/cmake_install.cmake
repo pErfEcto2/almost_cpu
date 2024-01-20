@@ -1,4 +1,4 @@
-# Install script for directory: /home/mephi/cpp/lab3/tests
+# Install script for directory: /home/mephi/cpp/almost_cpu/tests
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -44,7 +44,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/mephi/cpp/lab3/tests/_deps/googletest-build/cmake_install.cmake")
+  include("/home/mephi/cpp/almost_cpu/tests/_deps/googletest-build/cmake_install.cmake")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT)
@@ -55,5 +55,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/mephi/cpp/lab3/tests/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/mephi/cpp/almost_cpu/tests/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
