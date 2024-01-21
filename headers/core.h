@@ -35,6 +35,8 @@ public:
     void push();
     void pop();
     void cmp();
+    void je();
+    void jne();
 };
 
 #endif // CORE_H

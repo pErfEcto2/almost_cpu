@@ -387,7 +387,6 @@ CMakeFiles/app.dir/home/mephi/cpp/almost_cpu/src/cpu.cpp.o: /home/mephi/cpp/almo
   /usr/include/c++/13.2.1/bits/hash_bytes.h \
   /usr/include/c++/13.2.1/bits/invoke.h \
   /usr/include/c++/13.2.1/bits/ios_base.h \
-  /usr/include/c++/13.2.1/bits/istream.tcc \
   /usr/include/c++/13.2.1/bits/iterator_concepts.h \
   /usr/include/c++/13.2.1/bits/locale_classes.h \
   /usr/include/c++/13.2.1/bits/locale_classes.tcc \
@@ -458,8 +457,6 @@ CMakeFiles/app.dir/home/mephi/cpp/almost_cpu/src/cpu.cpp.o: /home/mephi/cpp/almo
   /usr/include/c++/13.2.1/initializer_list \
   /usr/include/c++/13.2.1/ios \
   /usr/include/c++/13.2.1/iosfwd \
-  /usr/include/c++/13.2.1/iostream \
-  /usr/include/c++/13.2.1/istream \
   /usr/include/c++/13.2.1/iterator \
   /usr/include/c++/13.2.1/limits \
   /usr/include/c++/13.2.1/mutex \
@@ -1494,6 +1491,8 @@ _deps/googletest-src/googletest/include/gtest/gtest-assertion-result.h:
 
 /usr/include/c++/13.2.1/locale:
 
+/usr/include/c++/13.2.1/istream:
+
 /usr/include/asm-generic/int-ll64.h:
 
 /usr/include/c++/13.2.1/ext/concurrence.h:
@@ -1557,10 +1556,6 @@ _deps/googletest-src/googletest/include/gtest/gtest-test-part.h:
 /usr/include/c++/13.2.1/bits/locale_conv.h:
 
 /usr/include/c++/13.2.1/bits/codecvt.h:
-
-/usr/include/c++/13.2.1/bits/allocated_ptr.h:
-
-/usr/include/c++/13.2.1/bits/align.h:
 
 /usr/include/c++/13.2.1/string:
 
@@ -1631,6 +1626,10 @@ _deps/googletest-src/googletest/include/gtest/gtest-printers.h:
 /usr/include/syscall.h:
 
 /usr/include/bits/long-double.h:
+
+/usr/include/c++/13.2.1/bits/istream.tcc:
+
+/usr/include/c++/13.2.1/bits/atomic_wait.h:
 
 /usr/include/c++/13.2.1/bits/regex_scanner.tcc:
 
@@ -1802,8 +1801,6 @@ _deps/googletest-src/googletest/include/gtest/gtest-typed-test.h:
 
 /usr/include/c++/13.2.1/typeinfo:
 
-/usr/include/c++/13.2.1/istream:
-
 /usr/include/bits/types/__sigset_t.h:
 
 /usr/include/c++/13.2.1/cerrno:
@@ -1889,6 +1886,8 @@ _deps/googletest-src/googletest/include/gtest/internal/gtest-port.h:
 /usr/include/bits/endianness.h:
 
 /usr/include/bits/types.h:
+
+/usr/include/c++/13.2.1/bits/allocated_ptr.h:
 
 /usr/include/linux/posix_types.h:
 
@@ -1977,6 +1976,16 @@ main.cpp:
 /usr/include/bits/types/siginfo_t.h:
 
 /usr/include/c++/13.2.1/thread:
+
+/usr/include/c++/13.2.1/iostream:
+
+/usr/include/bits/signal_ext.h:
+
+_deps/googletest-src/googletest/include/gtest/internal/gtest-internal.h:
+
+/usr/include/bits/types/mbstate_t.h:
+
+/home/mephi/cpp/almost_cpu/headers/core.h:
 
 /usr/include/bits/cpu-set.h:
 
@@ -2120,10 +2129,6 @@ _deps/googletest-src/googletest/include/gtest/gtest-message.h:
 
 /usr/include/c++/13.2.1/bits/basic_ios.tcc:
 
-/usr/include/c++/13.2.1/bits/atomic_wait.h:
-
-/usr/include/c++/13.2.1/bits/istream.tcc:
-
 /usr/include/c++/13.2.1/bits/stl_pair.h:
 
 /usr/include/c++/13.2.1/bits/locale_classes.h:
@@ -2147,16 +2152,6 @@ _deps/googletest-src/googletest/include/gtest/internal/gtest-filepath.h:
 /usr/include/c++/13.2.1/bits/ostream.tcc:
 
 /usr/include/c++/13.2.1/ios:
-
-/usr/include/bits/signal_ext.h:
-
-_deps/googletest-src/googletest/include/gtest/internal/gtest-internal.h:
-
-/usr/include/bits/types/mbstate_t.h:
-
-/home/mephi/cpp/almost_cpu/headers/core.h:
-
-/usr/include/c++/13.2.1/iostream:
 
 /usr/include/c++/13.2.1/iterator:
 
@@ -2183,3 +2178,5 @@ _deps/googletest-src/googletest/include/gtest/internal/gtest-internal.h:
 /usr/lib/gcc/x86_64-pc-linux-gnu/13.2.1/include/syslimits.h:
 
 /home/mephi/cpp/almost_cpu/src/lib.cpp:
+
+/usr/include/c++/13.2.1/bits/align.h:

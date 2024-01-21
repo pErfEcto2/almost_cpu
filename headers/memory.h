@@ -25,7 +25,7 @@ public:
 class Stack {
 public:
     unsigned int *values;
-    char ptr;
+    unsigned char ptr;
     Stack();
     ~Stack();
     void push(unsigned int value);

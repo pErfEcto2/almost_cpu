@@ -58,6 +58,12 @@ std::string Command::desc() {
         case Type::pop:
             return std::string("pop instruction returns a value from the stack");
 
+        case Type::je:
+            return std::string("je instruction jumps if EQUALS flag is set");
+
+        case Type::jne:
+            return std::string("jne instruction jumps if EQUALS flag is not set");
+
         case Type::cmp:
             return std::string("cmp instruction compares two operands and sets EQUALS(first operand == second operand) and LESS(first operand < second operand) flags(first operand cant be a number)");
         }

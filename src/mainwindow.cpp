@@ -189,6 +189,10 @@ void MainWindow::on_run_button_clicked() {
                 command.type = Type::pop;
             else if (instr == "cmp")
                 command.type = Type::cmp;
+            else if (instr == "je")
+                command.type = Type::je;
+            else if (instr == "jne")
+                command.type = Type::jne;
             else {
                 ui->text_to_show->setPlainText(QString::fromStdString(
                     "unknown instruction '" + instr + "' in line: \n" + line));
@@ -254,6 +258,8 @@ void MainWindow::on_run_button_clicked() {
                     break;
 
                 case Type::jmp:
+                case Type::je:
+                case Type::jne:
                 case Type::strthread:
                     if (labels.find(command_and_opers[1] + ":") != labels.end())
                             command.operA = std::to_string(labels[command_and_opers[1] + ":"]);

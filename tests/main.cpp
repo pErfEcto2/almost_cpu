@@ -218,6 +218,14 @@ TEST(cpu, any_tests) {
   cmd.operA = std::to_string(cmds.size() + 1);
   cmds.push_back(cmd);
 
+  cmd.type = Type::je;
+  cmd.operA = std::to_string(cmds.size() + 1);
+  cmds.push_back(cmd);
+
+  cmd.type = Type::jne;
+  cmd.operA = std::to_string(cmds.size() + 1);
+  cmds.push_back(cmd);
+
   cmds.push_back(Command(Type::hlt));
 
   Memory mem(32);

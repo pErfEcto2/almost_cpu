@@ -73,6 +73,16 @@ void Core::jmp() {
     instructionPtr = r1;
 }
 
+void Core::je() {
+    if (flags & EQUALS)
+        instructionPtr = r1;
+}
+
+void Core::jne() {
+    if (!(flags & EQUALS))
+        instructionPtr = r1;
+}
+
 void Core::hlt() {
     isWorking = false;
 }

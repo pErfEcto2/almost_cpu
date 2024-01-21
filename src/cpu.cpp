@@ -37,8 +37,6 @@ unsigned int CPU::oper2val(std::string oper, unsigned int i) {
   return str2uint(oper);
 }
 
-#include <iostream>
-
 void CPU::execCommand(Command command, unsigned int i) {
   unsigned int val;
   switch (command.type) {
@@ -201,7 +199,23 @@ void CPU::execCommand(Command command, unsigned int i) {
     break;
 
   case Type::jmp:
-    cores[i].instructionPtr = std::stoi(command.operA) - 1;
+  case Type::je:
+  case Type::jne:
+    cores[i].r1 = std::stoi(command.operA) - 1; // -1, because it increases by one after every instruction(i guess...)
+    switch (command.type) {
+    case Type::jmp:
+      cores[i].jmp();
+      break;
+
+    case Type::je:
+      cores[i].je();
+      break;
+
+    case Type::jne:
+      cores[i].jne();
+      break;
+    }
+
     break;
   }
 }

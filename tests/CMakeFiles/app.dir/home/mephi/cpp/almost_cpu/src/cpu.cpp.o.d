@@ -184,6 +184,4 @@ CMakeFiles/app.dir/home/mephi/cpp/almost_cpu/src/cpu.cpp.o: \
  /usr/include/c++/13.2.1/bits/semaphore_base.h \
  /usr/include/c++/13.2.1/bits/atomic_timed_wait.h \
  /usr/include/c++/13.2.1/bits/this_thread_sleep.h /usr/include/sys/time.h \
- /usr/include/semaphore.h /usr/include/bits/semaphore.h \
- /usr/include/c++/13.2.1/iostream /usr/include/c++/13.2.1/istream \
- /usr/include/c++/13.2.1/bits/istream.tcc
+ /usr/include/semaphore.h /usr/include/bits/semaphore.h
