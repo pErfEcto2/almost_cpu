@@ -5,7 +5,6 @@
 #include "ui_mainwindow.h"
 #include "../headers/vector.h"
 #include <iostream>
-#include <map>
 #include "../headers/cpu.h"
 #include <QIntValidator>
 #include <QFileDialog>
@@ -48,12 +47,15 @@ void MainWindow::on_import_button_clicked() {
     file.close();
 }
 
+void MainWindow::perror(std::string s) {
+    ui->text_to_show->setPlainText(QString::fromStdString(s));
+}
+
 void MainWindow::on_run_button_clicked() {
     QString num_of_cores = ui->number_of_cores_line->text();
     if (num_of_cores.size() == 0) num_of_cores = "2";
     else if (num_of_cores == "0") {
-        ui->text_to_show->setPlainText(
-            QString::fromStdString("invalid number of cores"));
+        perror("invalid number of cores");
         return;
     }
 
@@ -82,8 +84,7 @@ void MainWindow::on_run_button_clicked() {
             continue;
         }
         if (labels.find(line) != labels.end()) {
-            ui->text_to_show->setPlainText(
-                QString::fromStdString("redefintion of the label " + line));
+            perror("redefintion of the label " + line);
             return;
         }
         labels[line] = i;
@@ -107,23 +108,19 @@ void MainWindow::on_run_button_clicked() {
                 var_name = trim(str_split(line, '=')[0]);
                 str_value = trim(str_split(line, '=')[1]);
             } catch (std::exception &e) {
-                ui->text_to_show->setPlainText(
-                    QString::fromStdString("invalid syntax in  .data section"));
+                perror("invalid syntax in  .data section");
                 return;
             }
             if (var_name.size() == 0 || str_value.size() == 0) {
-                ui->text_to_show->setPlainText(
-                    QString::fromStdString("invalid name or value in .data section"));
+                perror("invalid name or value in .data section");
                 return;
             }
             if (variables.find(var_name) != variables.end()) {
-                ui->text_to_show->setPlainText(
-                    QString::fromStdString("redefinition of " + var_name));
+                perror("redefinition of " + var_name);
                 return;
             }
-            if (var_name == "A" || var_name == "B" || var_name == "r1" || var_name == "r2") {
-                ui->text_to_show->setPlainText(
-                    QString::fromStdString("invalid variable name: " + var_name));
+            if (is_reg_or_mem(var_name)) {
+                perror("invalid variable name: " + var_name);
                 return;
             }
 
@@ -132,15 +129,13 @@ void MainWindow::on_run_button_clicked() {
             try {
                     val = str2uint(str_value);
             } catch (std::invalid_argument &e) {
-                ui->text_to_show->setPlainText(
-                    QString::fromStdString("invalid value: " + str_value));
+                perror("invalid value: " + str_value);
                 return;
             }
 
             if (i >= mem.size) {
-                    ui->text_to_show->setPlainText(
-                    QString::fromStdString("not enough memory"));
-                    return;
+                perror("not enough memory");
+                return;
             }
 
             variables[var_name] = i;
@@ -194,8 +189,7 @@ void MainWindow::on_run_button_clicked() {
             else if (instr == "jne")
                 command.type = Type::jne;
             else {
-                ui->text_to_show->setPlainText(QString::fromStdString(
-                    "unknown instruction '" + instr + "' in line: \n" + line));
+                perror("unknown instruction '" + instr + "' in line: \n" + line);
                 return;
             }
 
@@ -203,10 +197,12 @@ void MainWindow::on_run_button_clicked() {
 
             try {
                 if (is_num(command_and_opers[1])) {
-                    ui->text_to_show->setPlainText(QString::fromStdString("cannot use rvalue '" + command_and_opers[1] + "' in line:\n" + line));
+                    perror("cannot use rvalue '" + command_and_opers[1] + "' in line:\n" + line);
                     return;
                 }
+
                 switch (command.type) {
+                // two operands
                 case Type::mov:
                 case Type::sum:
                 case Type::sumu:
@@ -217,63 +213,57 @@ void MainWindow::on_run_button_clicked() {
                 case Type::cmp:
                     if (variables.find(command_and_opers[1]) != variables.end())
                         command.operA = "m" + std::to_string(variables[command_and_opers[1]]);
-                    else if (is_num(command_and_opers[1]) || command_and_opers[1] == "A" || command_and_opers[1] == "B" ||
-                               command_and_opers[1] == "r1" || command_and_opers[1] == "r2" || command_and_opers[1][0] == 'm')
-                        command.operA = command_and_opers[1];
+                    else if (is_reg_or_mem(command_and_opers[1]))
+                        command.operA = transform_memory(command_and_opers[1], variables);
                     else {
-                            ui->text_to_show->setPlainText(
-                                QString::fromStdString("undefined variable '" + command_and_opers[1] + "' in line:\n" + line));
-                            return;
+                        perror("undefined variable '" + command_and_opers[1] + "' in line:\n" + line);
+                        return;
                     }
 
                     if (variables.find(command_and_opers[2]) != variables.end())
-                            command.operB = "m" + std::to_string(variables[command_and_opers[2]]);
-                    else if (is_num(command_and_opers[2]) || command_and_opers[2] == "A" || command_and_opers[2] == "B" ||
-                               command_and_opers[2] == "r1" || command_and_opers[2] == "r2" || command_and_opers[2][0] == 'm')
-                        command.operB = command_and_opers[2];
+                        command.operB = "m" + std::to_string(variables[command_and_opers[2]]);
+                    else if (is_num(command_and_opers[2]) || is_reg_or_mem(command_and_opers[2]))
+                        command.operB = transform_memory(command_and_opers[2], variables);
                     else {
-                            ui->text_to_show->setPlainText(
-                                QString::fromStdString("undefined variable '" + command_and_opers[2] + "' in line:\n" + line));
-                            return;
+                        perror("undefined variable '" + command_and_opers[2] + "' in line:\n" + line);
+                        return;
                     }
 
                     break;
 
+                // one operand
                 case Type::inc:
                 case Type::incf:
                 case Type::incu:
                 case Type::push:
                 case Type::pop:
                     if (variables.find(command_and_opers[1]) != variables.end())
-                            command.operA = std::to_string(variables[command_and_opers[1]]);
-                    else if (is_num(command_and_opers[1]) || command_and_opers[1] == "A" || command_and_opers[1] == "B" ||
-                             command_and_opers[1] == "r1" || command_and_opers[1] == "r2" || command_and_opers[1][0] == 'm')
-                        command.operA = command_and_opers[1];
+                        command.operA = std::to_string(variables[command_and_opers[1]]);
+                    else if (is_reg_or_mem(command_and_opers[1]))
+                        command.operA = transform_memory(command_and_opers[1], variables);
                     else {
-                            ui->text_to_show->setPlainText(
-                                QString::fromStdString("undefined variable '" + command_and_opers[1] + "' in line:\n" + line));
-                            return;
+                        perror("undefined variable '" + command_and_opers[1] + "' in line:\n" + line);
+                        return;
                     }
 
                     break;
 
+                // label as operand
                 case Type::jmp:
                 case Type::je:
                 case Type::jne:
                 case Type::strthread:
                     if (labels.find(command_and_opers[1] + ":") != labels.end())
-                            command.operA = std::to_string(labels[command_and_opers[1] + ":"]);
+                        command.operA = std::to_string(labels[command_and_opers[1] + ":"]);
                     else {
-                            ui->text_to_show->setPlainText(
-                                QString::fromStdString("undefined label '" + command_and_opers[1] + "' in line:\n" + line));
-                            return;
+                        perror("undefined label '" + command_and_opers[1] + "' in line:\n" + line);
+                        return;
                     }
 
                     break;
                 }
             } catch (std::exception &e) {
-                ui->text_to_show->setPlainText(
-                    QString::fromStdString("invalid syntax in line:\n" + line));
+                perror("invalid syntax in line:\n" + line);
                 return;
             }
 
@@ -285,8 +275,7 @@ void MainWindow::on_run_button_clicked() {
     try {
         cpu.run();
     } catch (std::exception &e) {
-        ui->text_to_show->setPlainText(
-            QString::fromStdString("runtime error:\n" + std::string(e.what())));
+        perror("runtime error:\n" + std::string(e.what()));
         return;
     }
 

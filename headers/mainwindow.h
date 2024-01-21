@@ -23,5 +23,6 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    void perror(std::string s);
 };
 #endif // MAINWINDOW_H

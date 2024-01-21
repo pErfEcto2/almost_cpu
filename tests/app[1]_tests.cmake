@@ -1,3 +1,5 @@
+add_test([=[transform_memory.any]=]  /home/mephi/cpp/almost_cpu/tests/app [==[--gtest_filter=transform_memory.any]==] --gtest_also_run_disabled_tests)
+set_tests_properties([=[transform_memory.any]=]  PROPERTIES WORKING_DIRECTORY /home/mephi/cpp/almost_cpu/tests SKIP_REGULAR_EXPRESSION [==[\[  SKIPPED \]]==])
 add_test([=[char2bin_str.any]=]  /home/mephi/cpp/almost_cpu/tests/app [==[--gtest_filter=char2bin_str.any]==] --gtest_also_run_disabled_tests)
 set_tests_properties([=[char2bin_str.any]=]  PROPERTIES WORKING_DIRECTORY /home/mephi/cpp/almost_cpu/tests SKIP_REGULAR_EXPRESSION [==[\[  SKIPPED \]]==])
 add_test([=[uint2hex.any_tests]=]  /home/mephi/cpp/almost_cpu/tests/app [==[--gtest_filter=uint2hex.any_tests]==] --gtest_also_run_disabled_tests)
@@ -26,4 +28,4 @@ add_test([=[i_ALU.tests]=]  /home/mephi/cpp/almost_cpu/tests/app [==[--gtest_fil
 set_tests_properties([=[i_ALU.tests]=]  PROPERTIES WORKING_DIRECTORY /home/mephi/cpp/almost_cpu/tests SKIP_REGULAR_EXPRESSION [==[\[  SKIPPED \]]==])
 add_test([=[f_ALU.tests]=]  /home/mephi/cpp/almost_cpu/tests/app [==[--gtest_filter=f_ALU.tests]==] --gtest_also_run_disabled_tests)
 set_tests_properties([=[f_ALU.tests]=]  PROPERTIES WORKING_DIRECTORY /home/mephi/cpp/almost_cpu/tests SKIP_REGULAR_EXPRESSION [==[\[  SKIPPED \]]==])
-set(  app_TESTS char2bin_str.any uint2hex.any_tests uint2.any_tests is_num.any_tests str2uint.any_tests cpu.any_tests memory.any_tests trim.any_tests split.any_tests vector.any_tests core.tests command.tests i_ALU.tests f_ALU.tests)
+set(  app_TESTS transform_memory.any char2bin_str.any uint2hex.any_tests uint2.any_tests is_num.any_tests str2uint.any_tests cpu.any_tests memory.any_tests trim.any_tests split.any_tests vector.any_tests core.tests command.tests i_ALU.tests f_ALU.tests)

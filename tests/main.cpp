@@ -10,6 +10,20 @@
 #include "../headers/memory.h"
 #include "../headers/vector.h"
 
+TEST(transform_memory, any) {
+  ASSERT_EQ(transform_memory("A", {}), "A");
+  ASSERT_EQ(transform_memory("m10", {}), "m10");
+
+  ASSERT_EQ(transform_memory("m(  m0  +   m1    )", {}), "m(m0+m1)");
+  ASSERT_EQ(transform_memory("m(a + b)", {{"a", 1}, {"b", 2}}), "m(m1+m2)");
+  ASSERT_EQ(transform_memory("m(  m0  +   b    )", {{"b", 2}}), "m(m0+m2)");
+  ASSERT_EQ(transform_memory("m(  a  +   m0    )", {{"a", 1}}), "m(m1+m0)");
+
+  ASSERT_EQ(transform_memory("m(  A  +   b    )", {{"b", 2}}), "m(A+m2)");
+  ASSERT_EQ(transform_memory("m(  a  +   r1    )", {{"a", 1}}), "m(m1+r1)");
+  ASSERT_EQ(transform_memory("m(  a  +   1    )", {{"a", 1}}), "m(m1+1)");
+}
+
 TEST(char2bin_str, any) {
   ASSERT_EQ(char2bin_str(0), "00000000");
   ASSERT_EQ(char2bin_str(1), "00000001");

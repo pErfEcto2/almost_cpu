@@ -1,6 +1,7 @@
 #include "../headers/lib.h"
 #include <regex>
 #include "../headers/memory.h"
+#include <stdexcept>
 
 Vector<std::string> str_split(std::string str, char pattern) {
     Vector<std::string> res;
@@ -63,3 +64,47 @@ std::string stack2str(unsigned int *values) {
     for (int i = 0; i < STACK_SIZE; i++) res += uint2hex(values[i]) + " ";
     return res;
 }
+
+bool is_reg_or_mem(std::string s) {
+    return s == "A" || s == "B" || s == "r1" || s == "r2" || s[0] == 'm';
+}
+
+#include <iostream>
+
+std::string transform_memory(std::string oper, std::map<std::string, unsigned int> vars) {
+    // transforms variables to memory addresses in complex memory expressions, like: m(a + b) -> m(m0 + m1)
+    // "a" can be either a variable or a memory address
+    // "b" can be a register, a variable, a memory address or a number
+    // everything else is syntax error)
+    if (oper.length() <= 2 || is_num(oper) || (oper[0] == 'm' && oper.find("(") == oper.npos)) return oper;
+
+    std::string res{"m("};
+    Vector<std::string> elems = str_split(trim(oper), '+'); // {"m( addr ", " offset )"}
+
+    elems[0] = trim(elems[0].substr(elems[0].find("(") + 1)); // "addr"
+    elems[1] = trim(elems[1].substr(0, elems[1].length() - 1)); // "offset"
+
+    // std::cout << elems[0] << " " << elems[1] << std::endl;
+    if (vars.find(elems[0]) != vars.end()) res += "m" + std::to_string(vars.at(elems[0])) + "+";
+    else res += elems[0] + "+";
+
+    if (vars.find(elems[1]) != vars.end()) res += "m" + std::to_string(vars.at(elems[1])) + ")";
+    else res += elems[1] + ")";
+
+    return res;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
