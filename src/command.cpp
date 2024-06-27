@@ -66,6 +66,9 @@ std::string Command::desc() {
 
         case Type::cmp:
             return std::string("cmp instruction compares two operands and sets EQUALS(first operand == second operand) and LESS(first operand < second operand) flags(first operand cant be a number)");
+
+        case Type::slp:
+            return std::string("slp instruction sleeps for given time in milliseconds(you cant pass rvalue, use registers, memory or variables)");
         }
 
         return "";

@@ -4,7 +4,6 @@
 #include "../headers/memory.h"
 #include "ui_mainwindow.h"
 #include "../headers/vector.h"
-#include <iostream>
 #include "../headers/cpu.h"
 #include <QIntValidator>
 #include <QFileDialog>
@@ -12,16 +11,31 @@
 
 #define MEM_SIZE 1024
 
+
+/*
+ * TODO:
+ * add virtual monitor & functions to draw
+*/
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
 
     ui->breakpoint_line->setValidator(new QIntValidator(0, 99999));
     ui->number_of_cores_line->setValidator(new QIntValidator(0, 99));
+
+    mem = new Memory(MEM_SIZE);
+    cpu = NULL;
+
+    timer = new QTimer(this);
+    connect(timer, &QTimer::timeout, this, &MainWindow::print_info);
 }
 
 MainWindow::~MainWindow() {
     delete ui;
+    delete timer;
+    delete mem;
+    delete cpu;
 }
 
 void MainWindow::on_save_button_clicked() {
@@ -71,7 +85,6 @@ void MainWindow::on_run_button_clicked() {
     bool isData = true;
     std::map<std::string, unsigned int> labels;
     std::map<std::string, unsigned int> variables;
-    Memory mem(MEM_SIZE);
     Vector<Command> commands;
     int i = 0;
 
@@ -133,13 +146,13 @@ void MainWindow::on_run_button_clicked() {
                 return;
             }
 
-            if (i >= mem.size) {
+            if (i >= mem->size) {
                 perror("not enough memory");
                 return;
             }
 
             variables[var_name] = i;
-            mem[i].value = val;
+            (*mem)[i].value = val;
             i++;
         } else if (breakpoint != 0){
             Vector<std::string> command_and_opers;
@@ -188,6 +201,8 @@ void MainWindow::on_run_button_clicked() {
                 command.type = Type::je;
             else if (instr == "jne")
                 command.type = Type::jne;
+            else if (instr == "slp")
+                command.type = Type::slp;
             else {
                 perror("unknown instruction '" + instr + "' in line: \n" + line);
                 return;
@@ -237,6 +252,7 @@ void MainWindow::on_run_button_clicked() {
                 case Type::incu:
                 case Type::push:
                 case Type::pop:
+                case Type::slp:
                     if (variables.find(command_and_opers[1]) != variables.end())
                         command.operA = std::to_string(variables[command_and_opers[1]]);
                     else if (is_reg_or_mem(command_and_opers[1]))
@@ -261,6 +277,10 @@ void MainWindow::on_run_button_clicked() {
                     }
 
                     break;
+
+                // no operands(hlt)
+                case Type::hlt:
+                    break;
                 }
             } catch (std::exception &e) {
                 perror("invalid syntax in line:\n" + line);
@@ -271,31 +291,47 @@ void MainWindow::on_run_button_clicked() {
         }
     }
 
-    CPU cpu(commands, mem, num_of_cores.toInt());
-    try {
-        cpu.run();
-    } catch (std::exception &e) {
-        perror("runtime error:\n" + std::string(e.what()));
-        return;
-    }
+    cpu = new CPU(commands, *mem, num_of_cores.toInt());
+    timer->start(100);
 
-    std::string status{"First " + std::to_string((int)(mem.size * 0.1)) + " elems of the memory:\n"};
+    // thr = std::thread([this](){
+        try {
+            cpu->run();
+        } catch (std::exception &e) {
+            perror("runtime error:\n" + std::string(e.what()));
+            return;
+        }
+    // });
 
-    for (int i{0}; i < (int)(mem.size * 0.1); i++) status += uint2hex(mem[i].value) + " ";
+    // try {
+    //     thr.join();
+    // } catch (std::system_error &e) {
+    //     perror(e.what());
+    // }
 
-    status += "\n\n" + cpu.getStatus();
+    timer->stop();
+    print_info();
 
+    delete cpu;
+    // timer->stop();
+}
+
+void MainWindow::print_info() {
+    std::string status{"First " + std::to_string((int)(mem->size * 0.1)) + " elems of the memory:\n"};
+    for (int i{0}; i < (int)(mem->size * 0.1); i++) status += uint2hex((*mem)[i].value) + " ";
+    status += "\n\n\n" + cpu->getStatus();
     ui->text_to_show->setPlainText(QString::fromStdString(status));
 }
 
 void MainWindow::on_get_desc_button_clicked() {
+    timer->stop();
     std::string res{"Docs:\n"
 "1) all lines with semicolon(;) at the beginning are considered as comments\n\n"
 "2) every line before '.code' section is consider '.data' section\n\n"
-"3) in the '.data' section every line must match the given regex: '\s*.+\s*=\s*\d(\.\d+)?\s*'\n\n"
+"3) in the '.data' section every line must match the given syntax: variable_name = int_or_float_value\n\n"
 "4) redefinitions of variables or labels are forbidden\n\n"
 "5) every line after '.code' line is consider in the '.code' section no matter if there're '.data' or '.code' lines\n\n"
-"6) every line in the '.code' section must match the given regex: '\s*.+(\s+.+)?(\s+.+)?\s*'\n(<instruction> <oper1 or empty> <oper2 or empty>)\n\n"
+"6) every line in the '.code' section must match the given syntax: instruction oper1_or_empty oper2_or_empty\n\n"
 "7) 'A', 'B', 'r1' and 'r2' are names of registers. First two are common for all cores. Each core has last two registers\n\n"
 "8) arguments in instructions are either a variable name, a memory address(a number, which starts with 'm' letter) or a number\n\n"
 "9) you can specify number of cores in the 'number of cores' line. Default is 2\n"

@@ -2,6 +2,9 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QTimer>
+#include "cpu.h"
+#include <thread>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -15,6 +18,9 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+public slots:
+    void print_info();
+
 private slots:
     void on_run_button_clicked();
     void on_get_desc_button_clicked();
@@ -24,5 +30,11 @@ private slots:
 private:
     Ui::MainWindow *ui;
     void perror(std::string s);
+
+    QTimer *timer;
+    Memory *mem;
+    CPU *cpu;
+
+    std::thread thr;
 };
 #endif // MAINWINDOW_H

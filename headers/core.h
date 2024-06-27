@@ -37,6 +37,7 @@ public:
     void cmp();
     void je();
     void jne();
+    void slp();
 };
 
 #endif // CORE_H

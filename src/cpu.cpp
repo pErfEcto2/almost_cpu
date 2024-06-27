@@ -13,8 +13,6 @@ CPU::CPU(Vector<Command> &c, Memory &m, int n) : commands(c), memory(m) {
 
   regA = 0;
   regB = 0;
-
-  cores[0].isWorking = true;
 }
 
 CPU::~CPU() {
@@ -56,13 +54,12 @@ void CPU::execCommand(Command command, unsigned int i) {
     else if (command.operA == "B")
       regB = val;
     else {
-      if (command.operB[0] == 'm')
-        memory[std::stoi(command.operB.substr(1))].mut.unlock();
-
       memory[std::stoi(command.operA.substr(1))].mut.lock();
       memory[std::stoi(command.operA.substr(1))].value = val;
       memory[std::stoi(command.operA.substr(1))].mut.unlock();
     }
+    if (command.operB[0] == 'm')
+        memory[std::stoi(command.operB.substr(1))].mut.unlock();
 
     break;
 
@@ -118,6 +115,7 @@ void CPU::execCommand(Command command, unsigned int i) {
   case Type::incf:
   case Type::push:
   case Type::pop:
+  case Type::slp:
     cores[i].r1 = oper2val(command.operA, i);
 
     switch (command.type) {
@@ -140,6 +138,10 @@ void CPU::execCommand(Command command, unsigned int i) {
     case Type::pop:
       cores[i].pop();
       break;
+
+    case Type::slp:
+        cores[i].slp();
+        break;
     }
 
     if (command.operA == "r1")
@@ -221,65 +223,68 @@ void CPU::execCommand(Command command, unsigned int i) {
 }
 
 bool CPU::any_core_works() {
-  bool res = false;
-  for (int i{0}; i < numOfCores; i++) res = res || cores[i].isWorking;
-  return res;
+    bool res = false;
+    for (int i{0}; i < numOfCores; i++) res = res || cores[i].isWorking;
+    return res;
 }
 
 int CPU::avail_core() {
-  int res = -1;
+    int res = -1;
 
-  for (int i{0}; i < numOfCores; i++) {
-    if (!cores[i].isWorking) {
-      res = i;
-      break;
+    for (int i{0}; i < numOfCores; i++) {
+        if (!cores[i].isWorking) {
+            res = i;
+            break;
+        }
     }
-  }
-  return res;
+    return res;
 }
 
 void CPU::run() {
-  std::thread threads[numOfCores];
+    std::thread threads[numOfCores];
 
-  while (any_core_works()) {
-    for (int i{0}; i < numOfCores; i++) {
-        if (cores[i].isWorking) {
-            threads[i] = std::thread([this, i](){
-                while (cores[i].isWorking) {
-                    if (cores[i].instructionPtr >= commands.size()) {
-                        cores[i].isWorking = false;
-                        return;
+    cores[0].isWorking = true;
+
+    while (any_core_works()) {
+        for (int i{0}; i < numOfCores; i++) {
+            if (cores[i].isWorking) {
+
+                threads[i] = std::thread([this, i](){
+                    while (cores[i].isWorking) {
+                        if (cores[i].instructionPtr >= commands.size()) {
+                            cores[i].isWorking = false;
+                            return;
+                        }
+
+                        if (commands[cores[i].instructionPtr].type == Type::strthread) return;
+
+                        execCommand(commands[cores[i].instructionPtr], i);
+                        cores[i].instructionPtr++;
                     }
+                });
+            }
+        }
 
-                    if (commands[cores[i].instructionPtr].type == Type::strthread) return;
+        for (int i{0}; i < numOfCores; i++)    {
+            try {
+                threads[i].join();
+            } catch (std::system_error &e) {}
+        }
 
-                    execCommand(commands[cores[i].instructionPtr], i);
-                    cores[i].instructionPtr++;
-                }
-            });
+        for (int i{0}; i < numOfCores; i++) {
+            if (cores[i].isWorking && commands[cores[i].instructionPtr].type == Type::strthread) {
+                unsigned int new_core_instr_ptr = std::stoi(commands[cores[i].instructionPtr].operA);
+                int new_core_index = avail_core();
+
+                if (new_core_index == -1) throw std::runtime_error("too many threads");
+
+                cores[new_core_index].instructionPtr = new_core_instr_ptr;
+                cores[new_core_index].isWorking = true;
+
+                cores[i].instructionPtr++;
+            }
         }
     }
-
-    for (int i{0}; i < numOfCores; i++)    {
-        try {
-            threads[i].join();
-        } catch (std::system_error &e) {}
-    }
-
-    for (int i{0}; i < numOfCores; i++) {
-        if (cores[i].isWorking && commands[cores[i].instructionPtr].type == Type::strthread) {
-            unsigned int new_core_instr_ptr = std::stoi(commands[cores[i].instructionPtr].operA);
-            int new_core_index = avail_core();
-
-            if (new_core_index == -1) throw std::runtime_error("too many threads");
-
-            cores[new_core_index].instructionPtr = new_core_instr_ptr;
-            cores[new_core_index].isWorking = true;
-
-            cores[i].instructionPtr++;
-        }
-    }
-  }
 }
 
 std::string CPU::getStatus() {

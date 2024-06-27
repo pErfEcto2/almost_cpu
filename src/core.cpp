@@ -1,4 +1,5 @@
 #include "../headers/core.h"
+#include <thread>
 
 Core::Core() {
     instructionPtr = 0;
@@ -49,6 +50,10 @@ void Core::mulu() {
     oper2alu();
     iALU.mulu();
     r1 = iALU.res;
+}
+
+void Core::slp() {
+    std::this_thread::sleep_for(std::chrono::milliseconds(r1));
 }
 
 void Core::inc() {

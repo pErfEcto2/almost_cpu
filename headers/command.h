@@ -21,6 +21,7 @@ enum Type {
     cmp,
     je,
     jne,
+    slp,
     hlt
 };
 
