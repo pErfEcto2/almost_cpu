@@ -14,8 +14,9 @@
 
 /*
  * TODO:
+ * fix bug when using variable(before .code section) which starts with "M"
  * realtime updates
- * memory transform in the lib
+ * memory transform in the CPU(i guess...)
  * add virtual monitor & functions to draw
 */
 

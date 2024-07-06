@@ -10,18 +10,47 @@
 #include "../headers/memory.h"
 #include "../headers/vector.h"
 
+TEST(cpu2, any) {
+  Vector<Command> cmds;
+  Command cmd;
+
+  cmd.type = Type::mov;
+  cmd.operA = "m2";
+  cmd.operB = "256";
+  cmds.push_back(cmd);
+
+  cmd.type = Type::mov;
+  cmd.operA = "A";
+  cmd.operB = "m(1+1)";
+  cmds.push_back(cmd);
+
+  Memory mem(32);
+  CPU cpu(cmds, mem, 2);
+  cpu.run();
+
+  ASSERT_EQ(cpu.regA, 256);
+}
+
 TEST(transform_memory, any) {
   ASSERT_EQ(transform_memory("A", {}), "A");
   ASSERT_EQ(transform_memory("m10", {}), "m10");
+  ASSERT_EQ(transform_memory("m100", {}), "m100");
+  ASSERT_EQ(transform_memory("m1000", {}), "m1000");
+  ASSERT_EQ(transform_memory("10", {}), "10");
+  ASSERT_EQ(transform_memory("r1", {}), "r1");
 
   ASSERT_EQ(transform_memory("m(  m0  +   m1    )", {}), "m(m0+m1)");
   ASSERT_EQ(transform_memory("m(a + b)", {{"a", 1}, {"b", 2}}), "m(m1+m2)");
   ASSERT_EQ(transform_memory("m(  m0  +   b    )", {{"b", 2}}), "m(m0+m2)");
   ASSERT_EQ(transform_memory("m(  a  +   m0    )", {{"a", 1}}), "m(m1+m0)");
-
   ASSERT_EQ(transform_memory("m(  A  +   b    )", {{"b", 2}}), "m(A+m2)");
   ASSERT_EQ(transform_memory("m(  a  +   r1    )", {{"a", 1}}), "m(m1+r1)");
   ASSERT_EQ(transform_memory("m(  a  +   1    )", {{"a", 1}}), "m(m1+1)");
+
+  ASSERT_EQ(transform_memory("m(  a  +   m0    )", {{"a", 1}}), "m(m1+m0)");
+  ASSERT_EQ(transform_memory("m(  b  +   A    )", {{"b", 2}}), "m(m2+A)");
+  ASSERT_EQ(transform_memory("m(  r1  +   a    )", {{"a", 1}}), "m(r1+m1)");
+  ASSERT_EQ(transform_memory("m(  1  +   a    )", {{"a", 1}}), "m(1+m1)");
 }
 
 TEST(char2bin_str, any) {

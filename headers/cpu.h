@@ -9,7 +9,7 @@
 
 
 class CPU {
-private:
+public:
     Vector<Command> &commands;
     Memory &memory;
     Core *cores;

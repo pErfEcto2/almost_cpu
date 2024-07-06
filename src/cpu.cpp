@@ -19,6 +19,8 @@ CPU::~CPU() {
   delete[] cores;
 }
 
+#include <iostream>
+
 unsigned int CPU::oper2val(std::string oper, unsigned int i) {
   if (oper == "r1")
     return cores[i].r1;
@@ -28,10 +30,33 @@ unsigned int CPU::oper2val(std::string oper, unsigned int i) {
     return regA;
   else if (oper == "B")
     return regB;
-  else if (oper[0] == 'm') {
+  else if (oper[0] == 'm' && oper[1] == '(') {
+    // complex examples: m(m1+m2) m(A+m1)  m(m1+A)  m(r1+A)
+    // 				     m(A+r1)  m(r1+m1) m(m1+r1) m(A+1)
+    // 				     m(r1+1)  m(m1+1)  m(1+1)   m(1+A)
+    //                   m(1+r1)  m(1+m1)  m(A+A)   m(r1+r1)
+
+    Vector<std::string> tmp = str_split(oper, '+');
+    std::string first_arg = tmp[0].substr(2); // removing "m("
+    std::string second_arg = tmp[1].substr(0, tmp[1].length() - 1); // removing ")"
+
+    int res = oper2val(first_arg, i);
+    if (first_arg[0] == 'm') {
+        memory[std::stoi(first_arg.substr(1))].mut.unlock();
+    }
+
+    res += oper2val(second_arg, i);
+    if (second_arg[0] == 'm') {
+        memory[std::stoi(second_arg.substr(1))].mut.unlock();
+    }
+
+    return memory[res].value;
+
+  } else if (oper[0] == 'm') {
     memory[std::stoi(oper.substr(1))].mut.lock();
     return memory[std::stoi(oper.substr(1))].value;
   }
+
   return str2uint(oper);
 }
 
@@ -58,7 +83,7 @@ void CPU::execCommand(Command command, unsigned int i) {
       memory[std::stoi(command.operA.substr(1))].value = val;
       memory[std::stoi(command.operA.substr(1))].mut.unlock();
     }
-    if (command.operB[0] == 'm')
+    if (command.operB[0] == 'm' && command.operB[1] != '(')
         memory[std::stoi(command.operB.substr(1))].mut.unlock();
 
     break;
