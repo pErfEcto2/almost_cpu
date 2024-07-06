@@ -28,14 +28,10 @@ MainWindow::MainWindow(QWidget *parent)
 
     mem = new Memory(MEM_SIZE);
     cpu = NULL;
-
-    timer = new QTimer(this);
-    connect(timer, &QTimer::timeout, this, &MainWindow::print_info);
 }
 
 MainWindow::~MainWindow() {
     delete ui;
-    delete timer;
     delete mem;
     delete cpu;
 }
@@ -299,28 +295,16 @@ void MainWindow::on_run_button_clicked() {
     }
 
     cpu = new CPU(commands, *mem, num_of_cores.toInt());
-    timer->start(100);
 
-    // thr = std::thread([this](){
-        try {
-            cpu->run();
-        } catch (std::exception &e) {
-            perror("runtime error:\n" + std::string(e.what()));
-            return;
-        }
-    // });
+    try {
+        cpu->run();
+    } catch (std::exception &e) {
+        perror("runtime error:\n" + std::string(e.what()));
+        return;
+    }
 
-    // try {
-    //     thr.join();
-    // } catch (std::system_error &e) {
-    //     perror(e.what());
-    // }
-
-    timer->stop();
     print_info();
-
     delete cpu;
-    // timer->stop();
 }
 
 void MainWindow::print_info() {
@@ -331,7 +315,6 @@ void MainWindow::print_info() {
 }
 
 void MainWindow::on_get_desc_button_clicked() {
-    timer->stop();
     std::string res{"Docs:\n"
 "1) all lines with semicolon(;) at the beginning are considered as comments\n\n"
 "2) every line before '.code' section is consider '.data' section\n\n"

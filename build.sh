@@ -14,6 +14,11 @@ qmake ../
 make 
 
 cd ../tests
+
+if [ ! -f Makefile ]; then
+	cmake CMakeLists.txt
+fi
+
 make 
 ./app
 ./gc.sh

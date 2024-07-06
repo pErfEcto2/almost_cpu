@@ -4,7 +4,6 @@
 #include <QMainWindow>
 #include <QTimer>
 #include "cpu.h"
-#include <thread>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -31,10 +30,7 @@ private:
     Ui::MainWindow *ui;
     void perror(std::string s);
 
-    QTimer *timer;
     Memory *mem;
     CPU *cpu;
-
-    std::thread thr;
 };
 #endif // MAINWINDOW_H

@@ -1,5 +1,0 @@
-if(EXISTS "/home/projects/cpp/almost_cpu/tests/app[1]_tests.cmake")
-  include("/home/projects/cpp/almost_cpu/tests/app[1]_tests.cmake")
-else()
-  add_test(app_NOT_BUILT app_NOT_BUILT)
-endif()
