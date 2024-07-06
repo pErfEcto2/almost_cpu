@@ -3,20 +3,25 @@
 
 cmake_minimum_required(VERSION 3.5)
 
+# If CMAKE_DISABLE_SOURCE_CHANGES is set to true and the source directory is an
+# existing directory in our source tree, calling file(MAKE_DIRECTORY) on it
+# would cause a fatal error, even though it would be a no-op.
+if(NOT EXISTS "/home/projects/cpp/almost_cpu/tests/_deps/googletest-src")
+  file(MAKE_DIRECTORY "/home/projects/cpp/almost_cpu/tests/_deps/googletest-src")
+endif()
 file(MAKE_DIRECTORY
-  "/home/mephi/cpp/almost_cpu/tests/_deps/googletest-src"
-  "/home/mephi/cpp/almost_cpu/tests/_deps/googletest-build"
-  "/home/mephi/cpp/almost_cpu/tests/_deps/googletest-subbuild/googletest-populate-prefix"
-  "/home/mephi/cpp/almost_cpu/tests/_deps/googletest-subbuild/googletest-populate-prefix/tmp"
-  "/home/mephi/cpp/almost_cpu/tests/_deps/googletest-subbuild/googletest-populate-prefix/src/googletest-populate-stamp"
-  "/home/mephi/cpp/almost_cpu/tests/_deps/googletest-subbuild/googletest-populate-prefix/src"
-  "/home/mephi/cpp/almost_cpu/tests/_deps/googletest-subbuild/googletest-populate-prefix/src/googletest-populate-stamp"
+  "/home/projects/cpp/almost_cpu/tests/_deps/googletest-build"
+  "/home/projects/cpp/almost_cpu/tests/_deps/googletest-subbuild/googletest-populate-prefix"
+  "/home/projects/cpp/almost_cpu/tests/_deps/googletest-subbuild/googletest-populate-prefix/tmp"
+  "/home/projects/cpp/almost_cpu/tests/_deps/googletest-subbuild/googletest-populate-prefix/src/googletest-populate-stamp"
+  "/home/projects/cpp/almost_cpu/tests/_deps/googletest-subbuild/googletest-populate-prefix/src"
+  "/home/projects/cpp/almost_cpu/tests/_deps/googletest-subbuild/googletest-populate-prefix/src/googletest-populate-stamp"
 )
 
 set(configSubDirs )
 foreach(subDir IN LISTS configSubDirs)
-    file(MAKE_DIRECTORY "/home/mephi/cpp/almost_cpu/tests/_deps/googletest-subbuild/googletest-populate-prefix/src/googletest-populate-stamp/${subDir}")
+    file(MAKE_DIRECTORY "/home/projects/cpp/almost_cpu/tests/_deps/googletest-subbuild/googletest-populate-prefix/src/googletest-populate-stamp/${subDir}")
 endforeach()
 if(cfgdir)
-  file(MAKE_DIRECTORY "/home/mephi/cpp/almost_cpu/tests/_deps/googletest-subbuild/googletest-populate-prefix/src/googletest-populate-stamp${cfgdir}") # cfgdir has leading slash
+  file(MAKE_DIRECTORY "/home/projects/cpp/almost_cpu/tests/_deps/googletest-subbuild/googletest-populate-prefix/src/googletest-populate-stamp${cfgdir}") # cfgdir has leading slash
 endif()

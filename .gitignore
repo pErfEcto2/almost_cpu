@@ -1,0 +1,10 @@
+/*.o
+/**/*.o
+build/*
+tests/*
+!tests/CMakeLists.txt
+!tests/main.cpp
+!tests/gc.sh
+.qm/
+.qmake.stash
+

@@ -14,6 +14,8 @@
 
 /*
  * TODO:
+ * realtime updates
+ * memory transform in the lib
  * add virtual monitor & functions to draw
 */
 
@@ -241,6 +243,11 @@ void MainWindow::on_run_button_clicked() {
                         command.operB = transform_memory(command_and_opers[2], variables);
                     else {
                         perror("undefined variable '" + command_and_opers[2] + "' in line:\n" + line);
+                        return;
+                    }
+
+                    if (command.operA == command.operB && command.type == Type::mov) {
+                        perror("cant use same args in the mov instruction in line:\n" + line);
                         return;
                     }
 

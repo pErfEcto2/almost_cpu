@@ -130,11 +130,6 @@ TEST(cpu, any_tests) {
 
   cmd.type = Type::mov;
   cmd.operA = "m0";
-  cmd.operB = "m0";
-  cmds.push_back(cmd);
-
-  cmd.type = Type::mov;
-  cmd.operA = "m0";
   cmd.operB = "1";
   cmds.push_back(cmd);
 
@@ -239,7 +234,6 @@ TEST(cpu, any_tests) {
   cmd.type = Type::jne;
   cmd.operA = std::to_string(cmds.size() + 1);
   cmds.push_back(cmd);
-
   cmds.push_back(Command(Type::hlt));
 
   Memory mem(32);

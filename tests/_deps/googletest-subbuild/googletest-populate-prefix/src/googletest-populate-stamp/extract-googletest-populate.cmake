@@ -5,10 +5,10 @@ cmake_minimum_required(VERSION 3.5)
 
 # Make file names absolute:
 #
-get_filename_component(filename "/home/mephi/cpp/almost_cpu/tests/_deps/googletest-subbuild/googletest-populate-prefix/src/03597a01ee50ed33e9dfd640b249b4be3799d395.zip" ABSOLUTE)
-get_filename_component(directory "/home/mephi/cpp/almost_cpu/tests/_deps/googletest-src" ABSOLUTE)
+get_filename_component(filename "/home/projects/cpp/almost_cpu/tests/_deps/googletest-subbuild/googletest-populate-prefix/src/03597a01ee50ed33e9dfd640b249b4be3799d395.zip" ABSOLUTE)
+get_filename_component(directory "/home/projects/cpp/almost_cpu/tests/_deps/googletest-src" ABSOLUTE)
 
-message(STATUS "extracting...
+message(VERBOSE "extracting...
      src='${filename}'
      dst='${directory}'"
 )
@@ -28,21 +28,21 @@ file(MAKE_DIRECTORY "${ut_dir}")
 
 # Extract it:
 #
-message(STATUS "extracting... [tar xfz]")
+message(VERBOSE "extracting... [tar xfz]")
 execute_process(COMMAND ${CMAKE_COMMAND} -E tar xfz ${filename} --touch
   WORKING_DIRECTORY ${ut_dir}
   RESULT_VARIABLE rv
 )
 
 if(NOT rv EQUAL 0)
-  message(STATUS "extracting... [error clean up]")
+  message(VERBOSE "extracting... [error clean up]")
   file(REMOVE_RECURSE "${ut_dir}")
   message(FATAL_ERROR "Extract of '${filename}' failed")
 endif()
 
 # Analyze what came out of the tar file:
 #
-message(STATUS "extracting... [analysis]")
+message(VERBOSE "extracting... [analysis]")
 file(GLOB contents "${ut_dir}/*")
 list(REMOVE_ITEM contents "${ut_dir}/.DS_Store")
 list(LENGTH contents n)
@@ -52,14 +52,14 @@ endif()
 
 # Move "the one" directory to the final directory:
 #
-message(STATUS "extracting... [rename]")
+message(VERBOSE "extracting... [rename]")
 file(REMOVE_RECURSE ${directory})
 get_filename_component(contents ${contents} ABSOLUTE)
 file(RENAME ${contents} ${directory})
 
 # Clean up:
 #
-message(STATUS "extracting... [clean up]")
+message(VERBOSE "extracting... [clean up]")
 file(REMOVE_RECURSE "${ut_dir}")
 
-message(STATUS "extracting... done")
+message(VERBOSE "extracting... done")

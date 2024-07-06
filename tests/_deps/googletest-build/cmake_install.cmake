@@ -1,4 +1,4 @@
-# Install script for directory: /home/mephi/cpp/almost_cpu/tests/_deps/googletest-src
+# Install script for directory: /home/projects/cpp/almost_cpu/tests/_deps/googletest-src
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -37,14 +37,14 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
   set(CMAKE_CROSSCOMPILING "FALSE")
 endif()
 
-# Set default install directory permissions.
+# Set path to fallback-tool for dependency-resolution.
 if(NOT DEFINED CMAKE_OBJDUMP)
   set(CMAKE_OBJDUMP "/usr/bin/objdump")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/home/mephi/cpp/almost_cpu/tests/_deps/googletest-build/googlemock/cmake_install.cmake")
+  include("/home/projects/cpp/almost_cpu/tests/_deps/googletest-build/googlemock/cmake_install.cmake")
 
 endif()
 
